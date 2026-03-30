@@ -86,11 +86,18 @@
 
 /* LINKS (NO UNDERLINE) */
 .footer-column a {
-  text-decoration: none;
-  color: #111827;
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
+  line-height: 1.2;
+  padding: 8px 0;
+  color: #111827;
+  position: relative;
   transition: color 0.2s ease;
+  text-decoration: none;
 }
+
+/* Hover color */
 
 .footer-column a:hover {
   color: #f2545b;
