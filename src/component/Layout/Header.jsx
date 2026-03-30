@@ -32,10 +32,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <div
-          className="hamburger"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
+        <div className="hamburger" onClick={() => setMenuOpen((prev) => !prev)}>
           ☰
         </div>
       </div>
