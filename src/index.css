@@ -23,3 +23,9 @@ body {
 #root {
   min-height: 100vh;
 }
+.footer-link {
+  @apply inline-flex items-center text-sm py-2 text-black hover:text-gray-700 transition-colors;
+}
+.footer-link svg {
+  @apply ml-1 w-4 h-4;
+}
