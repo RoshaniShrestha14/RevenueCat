@@ -1,9 +1,12 @@
+import Featured from "../component/Blog/Featured";
+import BlogControls from "../component/Blog/BlogControls";
+
 const Blog = () => {
   return (
-    <section>
-      <h1>Blog</h1>
-      <p>Latest updates will appear here.</p>
-    </section>
+    <div>
+      <Featured />
+      <BlogControls />
+    </div>
   );
 };
 
