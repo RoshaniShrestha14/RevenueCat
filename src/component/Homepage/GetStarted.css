@@ -1,0 +1,277 @@
+.get-started {
+  padding: 80px 20px;
+  background: #ffffff;
+}
+
+.get-started-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: stretch;
+  background: #f7f7fc;
+  border: 1px solid #dfe4f1;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 272px;
+}
+
+/* TEXT */
+.text-content {
+  position: relative;
+  width: 43%;
+  padding: 50px;
+  z-index: 2;
+}
+
+.text-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -160px;
+  width: 200px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(247, 247, 252, 0.95) 0%,
+    rgba(247, 247, 252, 0.55) 60%,
+    rgba(247, 247, 252, 0) 100%
+  );
+}
+
+.text-content h2 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.02;
+  color: #1a1f2d;
+  margin: 0 0 15px;
+}
+
+.text-content p {
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 0 20px;
+}
+
+.docs-link {
+  color: #4f46e5;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.docs-link:hover {
+  text-decoration: underline;
+}
+
+/* GRID */
+.logo-grid {
+  width: 57%;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(92px, 1fr));
+  grid-template-rows: repeat(4, 1fr);
+  border-left: 1px solid #e8e8e8;
+  background: #f9faff;
+}
+
+.logo-box {
+  border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  background: #fcfcff;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-box img {
+  width: 58px;
+  height: 58px;
+  opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .get-started-container {
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .text-content,
+  .logo-grid {
+    width: 100%;
+  }
+
+  .text-content {
+    padding: 32px 24px;
+  }
+
+  .text-content::after {
+    display: none;
+  }
+
+  .logo-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 92px);
+    border-left: 0;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .text-content h2 {
+    font-size: 30px;
+  }
+
+  .text-content p,
+  .docs-link {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .get-started {
+    padding: 44px 12px;
+  }
+
+  .text-content {
+    padding: 26px 18px;
+  }
+
+  .text-content h2 {
+    font-size: 28px;
+  }
+
+  .text-content p,
+  .docs-link {
+    font-size: 15px;
+  }
+
+  .logo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 82px);
+  }
+
+  .logo-box img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.pixery-section {
+  background: #ffffff;
+  padding: 48px 20px;
+}
+
+.pixery-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  justify-content: center;
+}
+
+.pixery-logo-card {
+  width: 200px;
+  height: 200px;
+  background: #f7f8fc;
+  border: 1px solid #e8e8e8;
+  border-radius: 32px;
+  box-shadow: 0 6px 16px rgba(20, 30, 60, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pixery-logo-card img {
+  width: 72%;
+  height: auto;
+  display: block;
+}
+
+.pixery-content h3 {
+  margin: 0;
+  max-width: 780px;
+  font-size: 36px;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+  font-weight: 500;
+  color: #1a2038;
+  text-align: left;
+}
+
+.pixery-content h3 span {
+  color: #ec5d6b;
+  font-weight: 700;
+}
+
+.pixery-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #5a6ee8;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.pixery-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1180px) {
+  .pixery-section {
+    padding: 40px 14px;
+  }
+
+  .pixery-container {
+    gap: 24px;
+  }
+
+  .pixery-logo-card {
+    width: 160px;
+    height: 160px;
+    border-radius: 28px;
+  }
+
+  .pixery-content h3 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .pixery-link {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 820px) {
+  .pixery-section {
+    padding: 32px 12px;
+  }
+
+  .pixery-container {
+    gap: 18px;
+  }
+
+  .pixery-logo-card {
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+  }
+
+  .pixery-content h3 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .pixery-link {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+}
