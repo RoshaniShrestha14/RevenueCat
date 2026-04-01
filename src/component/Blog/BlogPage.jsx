@@ -30,6 +30,17 @@ const BlogPage = () => {
       <div className="container grid">
         {/* CARD */}
         <BlogCard
+          image="/src/images/Kotlin-Coroutines-bridges.webp"
+          category="ENGINEERING"
+          title="Kotlin Coroutine bridges: converting any callback-based Android API to suspend functions"
+          desc="This article explores the suspendCoroutine bridge pattern, showing how to convert callback APIs into clean suspend functions,..."
+          author={{
+            name: "Alice Muir kocourkova",
+            img: "/src/images/Jaewoong-Eum.3.webp",
+          }}
+          date="March 31, 2026"
+        />
+        <BlogCard
           image="/src/images/subscription.webp"
           category="GROWTH"
           title="AI features are eroding your subscription app's margins - here's how to fix it"
@@ -53,7 +64,6 @@ const BlogPage = () => {
           date="March 25, 2026"
         />
 
-        {/* MORE CARDS */}
         <BlogCard
           image="/src/images/android.webp"
           category="ENGINEERING"
@@ -78,18 +88,7 @@ const BlogPage = () => {
           date="March 23, 2026"
         />
 
-        <BlogCard
-          image="/src/images/theright.webp"
-          category="GROWTH"
-          title="The 7-day trial, and other free trial myths: how to choose the right trial length for your subscription app"
-          desc="How to design trials that build habits, reduce churn, and drive revenue"
-          author={{
-            name: "Daphne Tideman",
-            img: "/src/images/daphne-tideman.5.webp",
-          }}
-          date="March 25, 2026"
-        />
-        {/* 🔥 PODCAST CARD ADDED HERE */}
+        {/*  PODCAST CARD ADDED HERE */}
         <div className="podcast-card">
           <img
             src="/src/images/posts-list-podcast-card-illustration-aafc0f5928d11920bc111537bc44d3bf.svg"
@@ -111,6 +110,120 @@ const BlogPage = () => {
             </a>
           </div>
         </div>
+        {/* 🔥 BIG HORIZONTAL CARD */}
+        <div className="horizontal-card">
+          <img
+            src="/src/images/theright.webp"
+            alt=""
+            className="horizontal-image"
+          />
+
+          <div className="horizontal-content">
+            <p className="category">GROWTH</p>
+
+            <h3 className="horizontal-title">
+              The 7-day trial, and other free trial myths: how to choose the
+              right trial length for your subscription app
+            </h3>
+
+            <p className="horizontal-desc">
+              How to design trials that build habits, reduce churn, and drive
+              revenue
+            </p>
+
+            <div className="author">
+              <img src="/src/images/daphne-tideman.5.webp" alt="" />
+              <div>
+                <p>Daphne Tideman</p>
+                <span>March 19, 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <BlogCard
+          image="/src/images/startapp-school.webp"
+          category="COMPANY"
+          title="Announcing StartApp School: Free courses from the experts who've scaled what you're building"
+          desc="Turn your app idea into a durable, profitable business with free courses from industry experts."
+          author={{
+            name: "Peter Meinertzhagen",
+            img: "/src/images/peter-meinertzhagen.webp",
+          }}
+          date="March 19, 2026"
+        />
+        <BlogCard
+          image="/src/images/Coconote-1.webp"
+          category="GROWTH"
+          title="How Coconote hit $1M ARR in 4 months with no paid ads"
+          desc="On the podcast: about hitting $1M ARR in four months with no paid ads, why trial extensions beat discounts for saving cancellations, and..."
+          author={{
+            name: "David Vargas",
+            img: "/src/images/David-Barnard.webp",
+          }}
+          date="March 18, 2026"
+        />
+        <BlogCard
+          image="/src/images/Remote-testing.webp"
+          category="ENGINEERING"
+          title="Apple guidelines explained: remote testing your iOS app (without getting your account banned)"
+          desc="Where Apple draws the line on remote config: safe experiments vs. violations"
+          author={{
+            name: "Rik Haandrikman",
+            img: "/src/images/Rik Haandrikman.webp",
+          }}
+          date="March 18, 2026"
+        />
+        {/* 🔥 SUBSCRIBE SECTION */}
+        <div className="subscribe-section">
+          <h2 className="subscribe-title">Subscribe to our newsletter</h2>
+
+          <form className="subscribe-form">
+            <input
+              type="email"
+              placeholder="Your email address..."
+              className="subscribe-input"
+            />
+
+            <button className="subscribe-btn">Subscribe</button>
+          </form>
+
+          {/* Decorative circle */}
+          <div className="subscribe-circle"></div>
+        </div>
+
+        <BlogCard
+          image="/src/images/Funnels-public-beta.webp"
+          category="COMPANY"
+          title="Build web-to-app funnels to convert more traffic"
+          desc="RevenueCat Funnels is in public beta."
+          author={{
+            name: "Niklas Winkels",
+            img: "/src/images/Niklas Winkels.webp",
+          }}
+          date="March 17, 2026"
+        />
+        <BlogCard
+          image="/src/images/Firebender-now.webp"
+          category="COMPANY"
+          title="Firebender now supports REVENUECAT MCP and OAuth"
+          desc="In this article, you'll explore how Firebender integrates with RevenueCat's MCP server, including how OAuth sign-in extablishes the..."
+          author={{
+            name: "Jaewoong Eum",
+            img: "/src/images/Jaewoong-Eum.3.webp",
+          }}
+          date="March 17, 2026"
+        />
+        <BlogCard
+          image="/src/images/Enhanced-app-campaigns.webp"
+          category="GROWTH"
+          title="Beyond SKAN: why standard app campaigns no longer define mobile UA"
+          desc="How enhanced app campaigns reshape attribution, reach, and control"
+          author={{
+            name: "Lucas Moscon",
+            img: "/src/images/lucas-moscon-revenuecat-author.webp",
+          }}
+          date="March 16, 2026"
+        />
       </div>
     </section>
   );
