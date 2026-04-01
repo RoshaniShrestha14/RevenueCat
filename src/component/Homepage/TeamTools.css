@@ -1,0 +1,112 @@
+.team-tools {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f8fafc;
+}
+
+.team-tools h2 {
+  font-size: 44px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.team-tools p {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 35px 28px;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon img {
+  width: 26px;
+  height: 26px;
+}
+
+.card h3 {
+  font-size: 22px;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 15px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: #4f46e5;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.slider {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.dot {
+  width: 60px;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: #1e293b;
+}
+
+@media (max-width: 992px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .team-tools h2 {
+    font-size: 30px;
+  }
+}

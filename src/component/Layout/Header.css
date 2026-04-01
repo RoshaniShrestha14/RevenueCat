@@ -7,10 +7,10 @@
 }
 
 .header-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  height: 72px;
-  padding: 0 32px;
+  width: 100%;
+  margin: 0;
+  height: 64px;
+  padding: 0 34px;
   position: relative;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@
 }
 
 .logo-image {
-  width: 160px;
+  width: 188px;
   height: auto;
   display: block;
 }
@@ -77,6 +77,15 @@
 }
 
 @media (max-width: 768px) {
+  .header-container {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .logo-image {
+    width: 150px;
+  }
+
   .nav-desktop {
     display: none;
     position: static;

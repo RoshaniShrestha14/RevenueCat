@@ -1,10 +1,14 @@
+import React from 'react'
+import Landing from '../component/Homepage/Landing'
+import TeamTools from '../component/Homepage/TeamTools'
+
 const Home = () => {
   return (
-    <section>
-      <h1>Home</h1>
-      <p>Welcome to RevenueCat.</p>
-    </section>
-  );
-};
+    <div>
+      <Landing/>
+      <TeamTools/>
+    </div>
+  )
+}
 
-export default Home;
+export default Home

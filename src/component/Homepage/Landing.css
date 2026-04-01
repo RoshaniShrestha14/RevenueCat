@@ -1,0 +1,284 @@
+.landing {
+  min-height: calc(100vh - 64px);
+  background: #f7f7fa;
+  display: flex;
+  align-items: center;
+  padding: 80px 34px 36px;
+}
+
+.landing-container {
+  max-width: 1840px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.landing-left {
+  width: 49%;
+}
+
+.landing-left h1 {
+  font-size: clamp(34px, 3.5vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #23245b;
+  font-weight: 700;
+}
+
+.landing-left p {
+  margin-top: 22px;
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: 1.42;
+  color: #4a4d72;
+  max-width: 640px;
+}
+
+.landing-action {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 30px;
+  gap: 16px;
+}
+
+.email-box {
+  width: min(100%, 520px);
+  height: 68px;
+  background: white;
+  border-radius: 34px;
+  box-shadow: 0 7px 18px rgba(39, 45, 103, 0.09);
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+}
+
+.email-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  padding-left: 16px;
+  color: #8a8eaa;
+  background: transparent;
+}
+
+.email-box input::placeholder {
+  color: #9499b3;
+}
+
+.email-box button {
+  width: 172px;
+  height: 56px;
+  border: none;
+  border-radius: 28px;
+  background: #5a6be9;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.landing-action a {
+  color: #5a6be9;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.stats {
+  display: flex;
+  gap: 0;
+  margin-top: 30px;
+}
+
+.stats > div {
+  padding-right: 24px;
+  margin-right: 24px;
+  border-right: 1px solid #d8d9e6;
+}
+
+.stats > div:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.stats h2 {
+  font-size: 26px;
+  color: #5a6be9;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.stats span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #4b4e73;
+}
+
+.landing-right {
+  width: 51%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.landing-right img {
+  width: min(100%, 820px);
+  transform: translateY(-8px);
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .landing {
+    padding: 40px 24px 30px;
+  }
+
+  .landing-container {
+    gap: 24px;
+  }
+
+  .landing-left h1 {
+    font-size: clamp(40px, 6vw, 64px);
+  }
+
+  .landing-left p {
+    font-size: clamp(18px, 2vw, 22px);
+  }
+
+  .landing-action {
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .email-box {
+    width: min(100%, 480px);
+    max-width: 480px;
+    height: 64px;
+  }
+
+  .email-box input {
+    font-size: 13px;
+  }
+
+  .email-box button {
+    width: 156px;
+    height: 52px;
+    font-size: 13px;
+  }
+
+  .landing-action a {
+    font-size: 12px;
+  }
+
+  .stats {
+    margin-top: 34px;
+  }
+
+  .stats h2 {
+    font-size: 24px;
+  }
+
+  .stats span {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 900px) {
+  .landing {
+    min-height: auto;
+    padding: 32px 16px 28px;
+  }
+
+  .landing-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .landing-left,
+  .landing-right {
+    width: 100%;
+  }
+
+  .landing-left h1 {
+    font-size: clamp(34px, 10vw, 52px);
+  }
+
+  .landing-left p {
+    margin-top: 16px;
+    font-size: 17px;
+  }
+
+  .email-box {
+    height: 68px;
+    border-radius: 34px;
+  }
+
+  .email-box input {
+    font-size: 15px;
+    padding-left: 16px;
+  }
+
+  .email-box button {
+    width: 172px;
+    height: 54px;
+    border-radius: 28px;
+    font-size: 15px;
+  }
+
+  .landing-action a {
+    font-size: 15px;
+  }
+
+  .stats {
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .stats > div {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .stats h2 {
+    font-size: 30px;
+  }
+
+  .stats span {
+    font-size: 14px;
+  }
+
+  .landing-right {
+    justify-content: center;
+  }
+}
+
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+.brand-strip {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 60px;
+  margin-top: 40px;
+}
+
+.brand-strip img {
+  height: 40px;
+  width: auto;
+}
