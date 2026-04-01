@@ -89,6 +89,28 @@ const BlogPage = () => {
           }}
           date="March 25, 2026"
         />
+        {/* 🔥 PODCAST CARD ADDED HERE */}
+        <div className="podcast-card">
+          <img
+            src="/src/images/posts-list-podcast-card-illustration-aafc0f5928d11920bc111537bc44d3bf.svg"
+            alt=""
+            className="podcast-image"
+          />
+
+          <div className="podcast-content">
+            <h2 className="podcast-title">The Sub Club Podcast</h2>
+
+            <p className="podcast-desc">
+              Interviews and deep dives with the experts behind the biggest apps
+              in the world.
+            </p>
+
+            <a href="#" className="podcast-btn">
+              <div className="play-icon">▶</div>
+              <span>Listen now</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
