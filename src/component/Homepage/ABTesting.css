@@ -1,0 +1,287 @@
+.ab {
+  padding: 120px 20px;
+  background: #f6f7fb;
+}
+
+.ab-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.ab-left {
+  flex: 1;
+  max-width: 500px;
+}
+
+.ab-left h1 {
+  font-size: clamp(36px, 3.2vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #1e293b;
+  margin-bottom: 24px;
+}
+
+.ab-left p {
+  font-size: clamp(16px, 1.2vw, 18px);
+  color: #64748b;
+  margin-bottom: 20px;
+  max-width: 480px;
+}
+
+.ab-left a {
+  font-size: clamp(14px, 1.1vw, 16px);
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ab-right {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+  max-width: 720px;
+}
+
+.phone {
+  width: 280px;
+  background: #ececf1;
+  border-radius: 42px;
+  padding: 14px;
+  border: 1px solid #d7dae4;
+  box-shadow: 0 16px 36px rgba(31, 35, 76, 0.08);
+}
+
+.phone-inner {
+  background: #f4f5fa;
+  border-radius: 30px;
+  border: 1px solid #d9dde8;
+  overflow: hidden;
+}
+
+.phone-inner img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 18px;
+  background: #f4f5fa;
+  border-radius: 16px 16px 0 0;
+}
+
+.content h3 {
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  color: #252852;
+  line-height: 1.06;
+  margin-bottom: 14px;
+}
+
+.check-lines {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.check {
+  width: 10px;
+  height: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #242756;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.check::before {
+  content: "\2713";
+}
+
+.line {
+  flex: 1;
+  height: 7px;
+  background: #d7d8e3;
+  border-radius: 6px;
+}
+
+.line.short {
+  width: 60%;
+}
+
+.plan {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 12px;
+  margin-top: 10px;
+  background: #f0f1f6;
+  border: 1px solid #d8dbe6;
+}
+
+.plan.active {
+  border: 2px solid #5c6df0;
+  background: #f3f5ff;
+}
+
+.radio {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #c6cde2;
+}
+
+.radio.active {
+  border: 4px solid #5d70f4;
+}
+
+.plan-text {
+  flex: 1;
+}
+
+.plan-text span {
+  font-size: 12px;
+  color: #2f3456;
+  font-weight: 600;
+}
+
+.plan .line {
+  height: 6px;
+}
+
+.plan-text b {
+  background: #20d38f;
+  color: #072a1c;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+
+.lifetime {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #e9ebf3;
+}
+
+.lifetime span {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 6px;
+  color: #3a3d5e;
+  font-weight: 600;
+}
+
+.lifetime .line {
+  height: 6px;
+}
+
+.ab button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  background: #24265a;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ab button:hover {
+  transform: translateY(-2px);
+}
+
+.pro {
+  color: #ef4444;
+}
+
+.vs {
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 992px) {
+  .ab-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ab-right {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .vs {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ab-left h1 {
+    font-size: 40px;
+  }
+
+  .ab-left p {
+    font-size: 17px;
+  }
+
+  .ab-left a {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ab-left h1 {
+    font-size: 34px;
+  }
+
+  .ab-left p {
+    font-size: 16px;
+  }
+
+  .ab-left a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ab-left h1 {
+    font-size: 34px;
+  }
+
+  .phone {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ab-left h1 {
+    font-size: 30px;
+  }
+
+  .ab-left p {
+    font-size: 15px;
+  }
+
+  .ab-left a {
+    font-size: 14px;
+  }
+}

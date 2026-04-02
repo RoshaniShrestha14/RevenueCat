@@ -1,0 +1,119 @@
+.case-highlight {
+  background: #f6f7fb;
+  margin-top: -72px;
+  padding: 18px 20px 48px;
+}
+
+.case-highlight-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  justify-content: center;
+  transform: translateX(28px);
+}
+
+.case-highlight-logo-wrap {
+  width: 200px;
+  height: 200px;
+  background: #f7f8fc;
+  border: 1px solid #e8e8e8;
+  border-radius: 32px;
+  box-shadow: 0 6px 16px rgba(20, 30, 60, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.case-highlight-logo {
+  width: 72%;
+  height: auto;
+  display: block;
+}
+
+.case-highlight-content {
+  max-width: 780px;
+}
+
+.case-highlight-content p {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+  color: #1a2038;
+  font-weight: 500;
+  text-align: left;
+}
+
+.case-highlight-content p span {
+  color: #ec5d6b;
+  font-weight: 700;
+}
+
+.case-highlight-content a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #5a6ee8;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+@media (max-width: 1180px) {
+  .case-highlight {
+    margin-top: -52px;
+    padding: 16px 14px 38px;
+  }
+
+  .case-highlight-container {
+    gap: 24px;
+    transform: translateX(18px);
+  }
+
+  .case-highlight-logo-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 28px;
+  }
+
+  .case-highlight-content p {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .case-highlight-content a {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 820px) {
+  .case-highlight {
+    margin-top: -24px;
+    padding: 12px 12px 28px;
+  }
+
+  .case-highlight-container {
+    gap: 18px;
+    transform: translateX(10px);
+  }
+
+  .case-highlight-logo-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+  }
+
+  .case-highlight-content p {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .case-highlight-content a {
+    font-size: 16px;
+    margin-top: 16px;
+  }
+}
