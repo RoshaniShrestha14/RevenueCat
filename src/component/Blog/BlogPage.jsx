@@ -173,22 +173,18 @@ const BlogPage = () => {
           }}
           date="March 18, 2026"
         />
-        {/* 🔥 SUBSCRIBE SECTION */}
-        <div className="subscribe-section">
-          <h2 className="subscribe-title">Subscribe to our newsletter</h2>
+        {/* SUBSCRIBE SECTION */}
+        <div className="subscribe-box">
+          <h2>Subscribe to our newsletter</h2>
 
           <form className="subscribe-form">
-            <input
-              type="email"
-              placeholder="Your email address..."
-              className="subscribe-input"
-            />
-
-            <button className="subscribe-btn">Subscribe</button>
+            <input type="email" placeholder="Your email address..." />
+            <button>Subscribe</button>
           </form>
 
-          {/* Decorative circle */}
-          <div className="subscribe-circle"></div>
+          {/* background shapes */}
+          <div className="shape-left"></div>
+          <div className="shape-right"></div>
         </div>
 
         <BlogCard
@@ -224,6 +220,71 @@ const BlogPage = () => {
           }}
           date="March 16, 2026"
         />
+        {/* PAGINATION */}
+        <div className="pagination-wrapper">
+          <ul className="pagination">
+            {/* PREVIOUS */}
+            <li className="prev disabled">
+              <button>
+                ← <span>Previous</span>
+              </button>
+            </li>
+
+            {/* PAGE NUMBERS */}
+            <li className="active">1</li>
+            <li>2</li>
+            <li className="dots">...</li>
+            <li>47</li>
+
+            {/* NEXT */}
+            <li className="next">
+              <button>
+                <span>Next</span> →
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div className="spacer"></div>
+        <br />
+        {/* ===== CTA SECTION (FULL WIDTH FIX) ===== */}
+        <div className="cta-wrapper">
+          <section className="cta-section">
+            <div className="cta-container">
+              {/* LEFT */}
+              <div className="cta-left">
+                <h2>Want to see how RevenueCat can help?</h2>
+
+                <div className="cta-buttons">
+                  <a href="#" className="btn-primary">
+                    Talk to sales
+                  </a>
+                  <a href="#" className="btn-link">
+                    Try It For Free
+                  </a>
+                </div>
+              </div>
+
+              {/* RIGHT */}
+              <div className="cta-card">
+                <p className="cta-quote">
+                  “RevenueCat enables us to have one single source of truth for
+                  subscriptions and revenue data.”
+                </p>
+
+                <div className="cta-user">
+                  <img src="/src/images/user.jpg" alt="user" />
+                  <span>Olivier Lemarié, Photoroom</span>
+                </div>
+
+                <a href="#" className="cta-link">
+                  Read Case Study
+                </a>
+
+                <div className="cta-shape"></div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
   );
