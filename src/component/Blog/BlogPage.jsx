@@ -246,46 +246,61 @@ const BlogPage = () => {
         </div>
         <div className="spacer"></div>
         <br />
-        {/* ===== CTA SECTION (FULL WIDTH FIX) ===== */}
-        <div className="cta-wrapper">
-          <section className="cta-section">
-            <div className="cta-container">
-              {/* LEFT */}
-              <div className="cta-left">
-                <h2>Want to see how RevenueCat can help?</h2>
-
-                <div className="cta-buttons">
-                  <a href="#" className="btn-primary">
-                    Talk to sales
-                  </a>
-                  <a href="#" className="btn-link">
-                    Try It For Free
-                  </a>
-                </div>
-              </div>
-
-              {/* RIGHT */}
-              <div className="cta-card">
-                <p className="cta-quote">
-                  “RevenueCat enables us to have one single source of truth for
-                  subscriptions and revenue data.”
-                </p>
-
-                <div className="cta-user">
-                  <img src="/src/images/user.jpg" alt="user" />
-                  <span>Olivier Lemarié, Photoroom</span>
-                </div>
-
-                <a href="#" className="cta-link">
-                  Read Case Study
-                </a>
-
-                <div className="cta-shape"></div>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
+      {/* ================= CTA SECTION ================= */}
+      <section className="cta-section">
+        <div className="cta-container">
+          {/* LEFT */}
+          <div className="cta-left">
+            <h2>Want to see how RevenueCat can help?</h2>
+
+            <div className="cta-buttons">
+              <a href="#" className="btn-primary">
+                Talk to sales
+              </a>
+              <a href="#" className="btn-link">
+                Try It For Free
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="cta-card">
+            <p className="cta-quote">
+              “RevenueCat enables us to have one single source of truth for
+              subscriptions and revenue data.”
+            </p>
+
+            <div className="cta-user">
+              <img
+                src="/src/images/Olivier Lemarie, Photoroom.jpg"
+                alt="user"
+              />
+              <span>Olivier Lemarié, Photoroom</span>
+            </div>
+
+            <a href="#" className="cta-link">
+              Read Case Study
+            </a>
+
+            {/* ✅ ONLY CURVED SVG */}
+            <svg
+              className="cta-curve"
+              viewBox="0 0 160 184"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 1 185 C 1 185 37.7 78 83 135 C 128 192 106 1 161 1"
+                stroke="#f25a5a"
+                strokeWidth="2"
+                pathLength="1"
+                strokeDasharray="1 1"
+              />
+            </svg>
+          </div>
+        </div>
+      </section>
     </section>
   );
 };
