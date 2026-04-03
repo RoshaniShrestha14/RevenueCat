@@ -11,6 +11,7 @@ import Growth from '../component/Homepage/Growth'
 import GrowthTestimonial from '../component/Homepage/GrowthTestimonial'
 import Retention from '../component/Homepage/Retention'
 import TrustedSection from '../component/Homepage/TrustedSection'
+import ResultsSlider from '../component/Homepage/ResultSlider'
 
 const Home = () => {
   return (
@@ -26,6 +27,7 @@ const Home = () => {
       <Growth/>
       <GrowthTestimonial/>
       <Retention  />
+      <ResultsSlider />
       <TrustedSection />
     </div>
   )

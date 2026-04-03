@@ -72,32 +72,32 @@
   margin-bottom: 12px;
 }
 
-.cta-section {
+.trusted-cta-section {
   text-align: center;
   margin-top: 14px;
 }
 
-.cta-section h1 {
-  font-size: 72px;
+.trusted-cta-section h1 {
+  font-size: 60px;
   font-weight: 700;
   color: #17173f;
   margin-bottom: 25px;
 }
 
-.cta-section p {
-  font-size: 22px;
+.trusted-cta-section p {
+  font-size: 18px;
   color: #4b4b73;
   margin-bottom: 40px;
 }
 
-.cta-buttons {
+.trusted-cta-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 35px;
 }
 
-.start-btn {
+.trusted-start-btn {
   background: #6674ff;
   color: white;
   border: none;
@@ -108,7 +108,7 @@
   cursor: pointer;
 }
 
-.cta-buttons a {
+.trusted-cta-buttons a {
   color: #6674ff;
   text-decoration: none;
   font-size: 20px;
@@ -142,16 +142,16 @@
     width: 52px;
   }
 
-  .cta-section h1 {
-    font-size: 52px;
+  .trusted-cta-section h1 {
+    font-size: 44px;
   }
 
-  .cta-section p {
-    font-size: 19px;
+  .trusted-cta-section p {
+    font-size: 17px;
   }
 
-  .start-btn,
-  .cta-buttons a {
+  .trusted-start-btn,
+  .trusted-cta-buttons a {
     font-size: 18px;
   }
 }
@@ -191,15 +191,15 @@
     margin-bottom: 10px;
   }
 
-  .cta-section h1 {
-    font-size: 42px;
+  .trusted-cta-section h1 {
+    font-size: 34px;
   }
 
-  .cta-section p {
-    font-size: 18px;
+  .trusted-cta-section p {
+    font-size: 16px;
   }
 
-  .cta-buttons {
+  .trusted-cta-buttons {
     flex-direction: column;
     gap: 20px;
   }

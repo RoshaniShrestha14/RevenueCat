@@ -36,15 +36,15 @@ const TrustedSection = () => {
         </div>
       </div>
 
-      <div className="cta-section">
+      <div className="trusted-cta-section">
         <h1>Ready to grow?</h1>
         <p>
           Our entire suite of features comes standard and it's free to get
           started.
         </p>
 
-        <div className="cta-buttons">
-          <button className="start-btn">Start for free</button>
+        <div className="trusted-cta-buttons">
+          <button className="trusted-start-btn">Start for free</button>
           <a href="/">Talk to sales &gt;</a>
         </div>
       </div>

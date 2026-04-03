@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./TeamTools.css";
 
 const cardsData = [
@@ -39,42 +39,112 @@ const cardsData = [
 
 const TeamTools = () => {
   const [active, setActive] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [stepSize, setStepSize] = useState(0);
+  const viewportRef = useRef(null);
+  const totalSlides = Math.max(1, cardsData.length - visibleCount + 1);
+  const maxSlideIndex = totalSlides - 1;
+  const safeActive = Math.min(active, maxSlideIndex);
+  const indicatorWidth = 100 / totalSlides;
+
+  useEffect(() => {
+    const updateMetrics = () => {
+      if (!viewportRef.current) return;
+      const width = viewportRef.current.clientWidth;
+      const nextVisibleCount = window.innerWidth <= 1024 ? 1 : 3;
+      setVisibleCount(nextVisibleCount);
+      setStepSize(width / nextVisibleCount + (30 / nextVisibleCount));
+    };
+
+    updateMetrics();
+    window.addEventListener("resize", updateMetrics);
+    return () => window.removeEventListener("resize", updateMetrics);
+  }, []);
+
+  useEffect(() => {
+    if (!viewportRef.current || !stepSize) return;
+
+    const node = viewportRef.current;
+    const onScroll = () => {
+      const next = Math.round(node.scrollLeft / stepSize);
+      setActive(Math.max(0, Math.min(next, maxSlideIndex)));
+    };
+
+    node.addEventListener("scroll", onScroll, { passive: true });
+    return () => node.removeEventListener("scroll", onScroll);
+  }, [stepSize, maxSlideIndex]);
+
+  const scrollToSlide = (index) => {
+    if (!viewportRef.current) return;
+    const nextIndex = Math.max(0, Math.min(index, maxSlideIndex));
+    viewportRef.current.scrollTo({
+      left: nextIndex * stepSize,
+      behavior: "smooth",
+    });
+    setActive(nextIndex);
+  };
+
+  const handleCardClick = (index) => {
+    scrollToSlide(index);
+  };
+
+  const handleSliderLineClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, x / rect.width));
+    const nextIndex = Math.floor(ratio * totalSlides);
+    scrollToSlide(nextIndex);
+  };
 
   return (
-    <section className="team-tools">
-      <h2>Data and tools for every team</h2>
-      <p>
+    <section className="tt-team-tools">
+      <h2 className="tt-heading">Data and tools for every team</h2>
+      <p className="tt-subheading">
         Make reliable cross-platform data and easy-to-use growth tools
         accessible to everyone.
       </p>
 
-      <div className="cards">
-        {cardsData.map((card, i) => (
-          <div
-            className={`card ${active === i ? "active" : ""}`}
-            key={i}
-            onClick={() => setActive(i)}
-          >
-            <div className="icon" style={{ background: card.color }}>
-              <img src={card.img} alt={card.title} />
+      <div className="tt-cards-viewport" ref={viewportRef}>
+        <div className="tt-cards-track">
+          {cardsData.map((card, i) => (
+            <div
+              className="tt-card"
+              key={`${card.title}-${i}`}
+              onClick={() => handleCardClick(i)}
+            >
+              <div
+                className="tt-icon-wrap"
+                style={{ background: card.color || "#eef2ff" }}
+              >
+                <img src={card.img} alt={card.title} />
+              </div>
+
+              <h3 className="tt-card-title">{card.title}</h3>
+              <p className="tt-card-text">{card.text}</p>
+
+              <span className="tt-link">
+                For {card.title.toLowerCase()} teams &gt;
+              </span>
             </div>
-
-            <h3>{card.title}</h3>
-            <p>{card.text}</p>
-
-            <span className="link">
-              For {card.title.toLowerCase()} teams &gt;
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <div className="slider">
-        {cardsData.map((_, i) => (
-          <div
+      <div className="tt-slider-line" onClick={handleSliderLineClick}>
+        <div
+          className="tt-slider-indicator"
+          style={{ left: `${safeActive * indicatorWidth}%`, width: `${indicatorWidth}%` }}
+        />
+      </div>
+
+      <div className="tt-slider-nav" aria-label="Team tools navigation">
+        {Array.from({ length: totalSlides }).map((_, i) => (
+          <button
             key={i}
-            className={`dot ${active === i ? "active" : ""}`}
-            onClick={() => setActive(i)}
+            type="button"
+            className={`tt-slider-step${safeActive === i ? " tt-active" : ""}`}
+            onClick={() => scrollToSlide(i)}
+            aria-current={safeActive === i ? "true" : undefined}
           />
         ))}
       </div>
