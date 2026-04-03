@@ -474,6 +474,11 @@
 }
 
 /* PRIMARY BUTTON */
+.cta-buttons a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 200;
+}
 .btn-primary {
   background: #5b6ee1;
   color: white;
@@ -503,7 +508,11 @@
   padding: 35px;
   background: #0a0a0a;
 }
-
+.cta-section p {
+  font-size: 22px;
+  color: white;
+  margin-bottom: 40px;
+}
 /* QUOTE */
 .cta-quote {
   font-size: 22px;
