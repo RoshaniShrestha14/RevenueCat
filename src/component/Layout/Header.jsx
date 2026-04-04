@@ -9,6 +9,7 @@ const Header = () => {
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "Blog", to: "/blog" },
+    { name: "Admin", to: "/admin" },
   ];
 
   return (

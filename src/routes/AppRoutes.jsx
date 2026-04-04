@@ -1,23 +1,32 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../component/Layout/Layout";
 import Home from "../page/Home";
 import Blog from "../page/Blog";
-import NotFound from "../component/ui/NotFound";
-import { ScrollToTop } from "./ScrollToTop";
+import AdminPage from "../page/AdminPage";
+import { useState } from "react";
 
-export default function AppRoutes() {
+const AppRoutes = () => {
+  const [posts, setPosts] = useState([]);
+
+  const addNewPost = (newPost) => {
+    setPosts((prev) => [newPost, ...prev]);
+  };
+
   return (
     <BrowserRouter>
-      <ScrollToTop />
-
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-        </Route>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
 
-        <Route path="*" element={<NotFound />} />
+          {/* ✅ PASS POSTS */}
+          <Route path="blog" element={<Blog posts={posts} />} />
+
+          {/* ✅ PASS FUNCTION */}
+          <Route path="admin" element={<AdminPage addNewPost={addNewPost} />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
+export default AppRoutes;

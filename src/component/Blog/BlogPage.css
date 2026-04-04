@@ -249,6 +249,7 @@
   font-size: 15px;
   background: white;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  color: #111827;
 }
 
 /* BUTTON (INSIDE INPUT) */
@@ -328,8 +329,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  list-style: none;
-  padding: 0;
+  flex-wrap: nowrap;
+  gap: 6px;
 }
 
 /* COMMON ITEMS */
@@ -365,12 +366,6 @@
 /* DOTS */
 .pagination .dots {
   cursor: default;
-}
-
-/* PREV / NEXT */
-.pagination .prev,
-.pagination .next {
-  flex: 1;
 }
 
 .pagination .prev {
@@ -478,6 +473,7 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: 200;
+  color: white;
 }
 .btn-primary {
   background: #5b6ee1;
@@ -579,4 +575,23 @@
     width: 100%;
     margin-top: 30px;
   }
+}
+.page-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.page-number.active {
+  background: #eaedf6;
 }

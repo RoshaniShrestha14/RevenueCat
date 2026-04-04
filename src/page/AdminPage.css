@@ -1,0 +1,159 @@
+/* PAGE BACKGROUND (WHITE + SOFT GRADIENT) */
+.admin-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top left, #c7d2fe, transparent 40%),
+    radial-gradient(circle at bottom right, #e9d5ff, transparent 40%),
+    linear-gradient(135deg, #ffffff, #f8fafc);
+}
+
+/* SOFT GLOW */
+.admin-page::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: #6366f1;
+  filter: blur(120px);
+  top: -100px;
+  left: -100px;
+  opacity: 0.2;
+}
+
+.admin-page::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: #a855f7;
+  filter: blur(120px);
+  bottom: -100px;
+  right: -100px;
+  opacity: 0.2;
+}
+
+/* CARD */
+.admin-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 35px;
+  border-radius: 16px;
+  z-index: 1;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+
+  animation: fadeIn 0.6s ease;
+}
+
+/* HEADER */
+.admin-card h2 {
+  margin-bottom: 5px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+/* FORM */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* INPUTS */
+.admin-form input,
+.admin-form textarea {
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #111827;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* HOVER + FOCUS */
+.admin-form input:hover,
+.admin-form textarea:hover {
+  border-color: #6366f1;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* TEXTAREA */
+.admin-form textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* BUTTON */
+.admin-form button {
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 5px;
+
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-form button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
+}
+
+/* SUCCESS MESSAGE */
+.success-msg {
+  background: #dcfce7;
+  border: 1px solid #22c55e;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #15803d;
+  font-weight: 500;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
