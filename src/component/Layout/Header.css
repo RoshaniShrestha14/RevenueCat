@@ -17,13 +17,13 @@
   justify-content: space-between;
 }
 
-.logo-section {
+.header-logo-section {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
 }
 
-.logo-image {
+.header-logo-image {
   width: 188px;
   height: auto;
   display: block;
@@ -82,7 +82,7 @@
     padding: 0 16px;
   }
 
-  .logo-image {
+  .header-logo-image {
     width: 150px;
   }
 
