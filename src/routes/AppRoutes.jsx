@@ -4,6 +4,7 @@ import Home from "../page/Home";
 import Blog from "../page/Blog";
 import AdminPage from "../page/AdminPage";
 import { useState } from "react";
+import { ScrollToTop } from "./ScrollToTop";
 
 const AppRoutes = () => {
   const [posts, setPosts] = useState([]);
@@ -14,6 +15,7 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
