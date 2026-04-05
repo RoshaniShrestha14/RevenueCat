@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./BlogControls.css";
 
-const BlogControls = ({ setCategoryFilter }) => {
+const BlogControls = ({ setCategoryFilter, onCategoryChange }) => {
   // Track which category is active
   const [activeCategory, setActiveCategory] = useState("ALL");
 
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
     setCategoryFilter(category); // inform BlogPage about filter
+    onCategoryChange?.();
   };
 
   return (

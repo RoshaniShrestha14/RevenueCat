@@ -9,26 +9,25 @@ import BlogControls from "./BlogControls";
   desc,
   author,
   date,
-  onDelete,
 }) => {
   return (
     <article className="blog-card">
-      <img src={image} alt="" className="blog-image" />
+      <img
+        src={image || "/logo.svg"}
+        alt={title || "Blog post"}
+        className="blog-image"
+      />
       <div className="blog-content">
-        <p className="category">{category}</p> <h3>{title}</h3> <p>{desc}</p>
+        <p className="category">{category}</p>
+        <h3>{title}</h3>
+        <p className="desc">{desc}</p>
         <div className="author">
-          <img src={author?.img} alt="" />
+          <img src={author?.img || "/logo.svg"} alt={author?.name || "Author"} />
           <div>
-            <p>{author?.name}</p> <span>{date}</span>
+            <p>{author?.name}</p>
+            <span>{date}</span>
           </div>
         </div>
-        {onDelete && (
-          <div className="blog-actions">
-            <button className="delete-btn" onClick={onDelete}>
-              🗑️ Delete
-            </button>
-          </div>
-        )}
       </div>
     </article>
   );
@@ -88,31 +87,45 @@ import BlogControls from "./BlogControls";
     date: "March 23, 2026",
   },
 ];
-/* ================= MAIN ================= */ const BlogPage = ({
+const BlogPage = ({
   posts = [],
-  deletePost,
-  editPost,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeCategory, setActiveCategory] = useState("All articles");
+  const [activeCategory, setActiveCategory] = useState("ALL");
+  const itemsPerPage = 9;
+
+  const postsWithFallbackCategory = posts.map((post) => ({
+    ...post,
+    category: post.category || "GENERAL",
+  }));
+
+  const allArticles = [...postsWithFallbackCategory, ...staticBlogs];
+
+  const filteredArticles = allArticles.filter((blog) =>
+    activeCategory === "ALL" ? true : blog.category === activeCategory,
+  );
+
+  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const visibleArticles = filteredArticles.slice(startIdx, startIdx + itemsPerPage);
+
   return (
     <>
-      {/* 🔥 TOP */} <Featured />{" "}
-      <BlogControls setActiveCategory={setActiveCategory} /> {/* 🔥 BLOGS */}
+    <Featured />{" "}
+      <BlogControls
+        setCategoryFilter={setActiveCategory}
+        onCategoryChange={() => setCurrentPage(1)}
+      /> {/* 🔥 BLOGS */}
       <section className="blog-page">
         <div className="container grid">
+          {visibleArticles.map((blog, index) => (
+            <BlogCard
+              key={blog.id || `${blog.title}-${index}`}
+              {...blog}
+            />
+          ))}
           {currentPage === 1 && (
             <>
-              {/* STATIC BLOGS */}
-              {staticBlogs
-                .filter((blog) =>
-                  activeCategory === "All articles"
-                    ? true
-                    : blog.category === activeCategory,
-                )
-                .map((blog, index) => (
-                  <BlogCard key={index} {...blog} />
-                ))}
               {/* PODCAST CARD ADDED HERE */}
               <div className="podcast-card">
                 <img
@@ -235,39 +248,22 @@ import BlogControls from "./BlogControls";
               />
             </>
           )}
-          {currentPage === 2 && (
-            <>
-              {posts.length === 0 ? (
-                <p>No blogs added yet</p>
-              ) : (
-                posts.map((post) => (
-                  <BlogCard
-                    key={post.id}
-                    {...post}
-                    onDelete={() => deletePost(post.id)}
-                    onEdit={() => editPost(post)}
-                  />
-                ))
-              )}
-            </>
-          )}
           {/* PAGINATION */}
-          <div className="pagination-wrapper">
-            <ul className="pagination">
-              <li
-                className={currentPage === 1 ? "active" : ""}
-                onClick={() => setCurrentPage(1)}
-              >
-                1
-              </li>
-              <li
-                className={currentPage === 2 ? "active" : ""}
-                onClick={() => setCurrentPage(2)}
-              >
-                2
-              </li>
-            </ul>
-          </div>
+          {totalPages > 1 && (
+            <div className="pagination-wrapper">
+              <ul className="pagination">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <li
+                    key={page}
+                    className={currentPage === page ? "active" : ""}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
       {/* ================= CTA SECTION ================= */}

@@ -23,15 +23,17 @@ const AppRoutes = () => {
     localStorage.setItem("blogs", JSON.stringify(posts));
   }, [posts]);
 
-  // ✅ ADD BLOG WITHOUT IMAGE
+ 
   const addNewPost = (newBlog) => {
     const blogWithFullData = {
       id: Date.now(),
-      title: newBlog.title || "No title",
-      desc: newBlog.desc || "",
-      category: newBlog.category || "GENERAL",
+      title: newBlog.title?.trim() || "No title",
+      desc: newBlog.desc?.trim() || "",
+      category: newBlog.category?.trim().toUpperCase() || "GENERAL",
+      image: newBlog.image?.trim() || "/logo.svg",
       author: {
-        name: newBlog.author || "Admin",
+        name: newBlog.author?.trim() || "Admin",
+        img: newBlog.authorImg?.trim() || undefined,
       },
       date: new Date().toLocaleDateString(),
     };
@@ -67,7 +69,10 @@ const AppRoutes = () => {
             }
           />
 
-          <Route path="admin" element={<AdminPage addNewPost={addNewPost} />} />
+          <Route
+            path="admin"
+            element={<AdminPage addNewPost={addNewPost} posts={posts} deletePost={deletePost} editPost={editPost} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
