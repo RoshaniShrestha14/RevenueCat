@@ -19,24 +19,10 @@ const AdminPage = ({ addNewPost }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newBlog = {
-      image: form.image || "/src/images/free.webp",
-      category: form.category,
-      title: form.title,
-      desc: form.desc,
-      author: {
-        name: form.author,
-        img: "/src/images/Jaewoong-Eum.3.webp",
-      },
-      date: new Date().toDateString(),
-    };
+    addNewPost(form);
 
-    addNewPost(newBlog);
+    setMessage("✅ Blog Added!");
 
-    // ✅ success message
-    setMessage("✅ Blog Added Successfully!");
-
-    // clear form
     setForm({
       title: "",
       category: "",
@@ -45,59 +31,53 @@ const AdminPage = ({ addNewPost }) => {
       author: "",
     });
 
-    // remove message after 3 sec
     setTimeout(() => setMessage(""), 3000);
   };
 
   return (
     <div className="admin-page">
       <div className="admin-card">
-        <h2>🚀 RevenueCat Admin Panel</h2>
-        <p className="subtitle">Create and publish new blog posts</p>
+        <h2>Admin Panel</h2>
 
         {message && <div className="success-msg">{message}</div>}
 
         <form onSubmit={handleSubmit} className="admin-form">
           <input
             name="title"
-            placeholder="Blog Title"
+            placeholder="Title"
             value={form.title}
             onChange={handleChange}
             required
           />
-
           <input
             name="category"
-            placeholder="Category (e.g. Growth, Engineering)"
+            placeholder="Category"
             value={form.category}
             onChange={handleChange}
             required
           />
-
           <input
             name="image"
-            placeholder="Image URL"
+            placeholder="Image URL (/images/...)"
             value={form.image}
             onChange={handleChange}
           />
-
           <input
             name="author"
-            placeholder="Author Name"
+            placeholder="Author"
             value={form.author}
             onChange={handleChange}
             required
           />
-
           <textarea
             name="desc"
-            placeholder="Blog Description"
+            placeholder="Description"
             value={form.desc}
             onChange={handleChange}
             required
           />
 
-          <button type="submit">➕ Publish Blog</button>
+          <button type="submit">Publish Blog</button>
         </form>
       </div>
     </div>

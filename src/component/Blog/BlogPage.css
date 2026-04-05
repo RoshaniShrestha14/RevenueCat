@@ -61,7 +61,52 @@
   color: black;
   flex-grow: 1;
 }
+/* ACTION BUTTON WRAPPER */
+.blog-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
 
+/* COMMON BUTTON STYLE */
+.blog-actions button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* ✏️ EDIT BUTTON */
+.edit-btn {
+  background: #e0f2fe; /* light blue */
+  color: #0369a1; /* dark blue text */
+}
+
+.edit-btn:hover {
+  background: #38bdf8; /* stronger blue */
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* 🗑️ DELETE BUTTON */
+.delete-btn {
+  background: #fee2e2; /* light red */
+  color: #b91c1c; /* dark red */
+}
+
+.delete-btn:hover {
+  background: #ef4444; /* strong red */
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* CLICK EFFECT */
+.blog-actions button:active {
+  transform: scale(0.95);
+}
 /* AUTHOR */
 .author {
   display: flex;

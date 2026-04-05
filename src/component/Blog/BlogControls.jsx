@@ -1,6 +1,15 @@
+import { useState } from "react";
 import "./BlogControls.css";
 
-const BlogControls = () => {
+const BlogControls = ({ setCategoryFilter }) => {
+  // Track which category is active
+  const [activeCategory, setActiveCategory] = useState("ALL");
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    setCategoryFilter(category); // inform BlogPage about filter
+  };
+
   return (
     <div className="blog-controls">
       <div className="container">
@@ -8,18 +17,40 @@ const BlogControls = () => {
           {/* CATEGORY TABS */}
           <ul className="categories">
             <li>
-              <a className="active" href="#">
+              <a
+                href="#"
+                className={activeCategory === "ALL" ? "active" : ""}
+                onClick={() => handleCategoryClick("ALL")}
+              >
                 All articles
               </a>
             </li>
             <li>
-              <a href="#">Company</a>
+              <a
+                href="#"
+                className={activeCategory === "COMPANY" ? "active" : ""}
+                onClick={() => handleCategoryClick("COMPANY")}
+              >
+                Company
+              </a>
             </li>
             <li>
-              <a href="#">Engineering</a>
+              <a
+                href="#"
+                className={activeCategory === "ENGINEERING" ? "active" : ""}
+                onClick={() => handleCategoryClick("ENGINEERING")}
+              >
+                Engineering
+              </a>
             </li>
             <li>
-              <a href="#">Growth</a>
+              <a
+                href="#"
+                className={activeCategory === "GROWTH" ? "active" : ""}
+                onClick={() => handleCategoryClick("GROWTH")}
+              >
+                Growth
+              </a>
             </li>
           </ul>
 
@@ -27,7 +58,6 @@ const BlogControls = () => {
           <div className="right-actions">
             <div className="follow">
               <span>Follow for updates:</span>
-
               <div className="icons">
                 <a href="#">
                   <svg viewBox="0 0 24 24" className="icon">
@@ -38,7 +68,6 @@ const BlogControls = () => {
                   </svg>
                 </a>
 
-                {/* ✅ RSS / WiFi icon */}
                 <a href="/blog/rss.xml" className="group">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +87,7 @@ const BlogControls = () => {
               </div>
             </div>
 
-            {/* ✅ SEARCH BUTTON (UPDATED) */}
+            {/* SEARCH BUTTON */}
             <button className="search-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,11 +106,14 @@ const BlogControls = () => {
 
         {/* MOBILE DROPDOWN */}
         <div className="mobile-select">
-          <select>
-            <option>All articles</option>
-            <option>Company</option>
-            <option>Engineering</option>
-            <option>Growth</option>
+          <select
+            value={activeCategory}
+            onChange={(e) => handleCategoryClick(e.target.value)}
+          >
+            <option value="ALL">All articles</option>
+            <option value="COMPANY">Company</option>
+            <option value="ENGINEERING">Engineering</option>
+            <option value="GROWTH">Growth</option>
           </select>
         </div>
       </div>

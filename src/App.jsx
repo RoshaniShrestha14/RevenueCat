@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./component/Layout/Layout";
 import Home from "./page/Home";
 import Blog from "./page/Blog";
+import EditBlogPage from "./EditBlogPage";
 
 const AppRoutes = () => {
   return (
