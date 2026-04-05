@@ -5,6 +5,7 @@ import Layout from "../component/Layout/Layout";
 import Home from "../page/Home";
 import BlogPage from "../component/Blog/BlogPage";
 import AdminPage from "../page/AdminPage";
+import { ScrollToTop } from "./ScrollToTop";
 
 const AppRoutes = () => {
   // LOAD DATA
@@ -50,6 +51,7 @@ const AppRoutes = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home posts={posts} />} />

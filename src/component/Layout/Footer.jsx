@@ -1,17 +1,24 @@
 import React from "react";
 import "./Footer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter, FaMastodon } from "react-icons/fa6";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleLogoClick = (event) => {
+    event.preventDefault();
+    navigate("/");
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         {/* LEFT SECTION */}
         <div className="footer-left">
           {/* Logo */}
-          <Link to="/" className="logo-section">
+          <Link to="/" className="logo-section" onClick={handleLogoClick}>
             <img src="/logo.svg" alt="RevenueCat" />
           </Link>
 
