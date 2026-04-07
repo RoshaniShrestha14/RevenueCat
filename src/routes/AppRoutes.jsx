@@ -5,6 +5,7 @@ import Layout from "../component/Layout/Layout";
 import Home from "../page/Home";
 import BlogPage from "../component/Blog/BlogPage";
 import AdminPage from "../page/AdminPage";
+import BlogDetail from "../component/Blog/BlogDetail";
 import { ScrollToTop } from "./ScrollToTop";
 
 const AppRoutes = () => {
@@ -23,7 +24,6 @@ const AppRoutes = () => {
     localStorage.setItem("blogs", JSON.stringify(posts));
   }, [posts]);
 
- 
   const addNewPost = (newBlog) => {
     const blogWithFullData = {
       id: Date.now(),
@@ -71,9 +71,18 @@ const AppRoutes = () => {
 
           <Route
             path="admin"
-            element={<AdminPage addNewPost={addNewPost} posts={posts} deletePost={deletePost} editPost={editPost} />}
+            element={
+              <AdminPage
+                addNewPost={addNewPost}
+                posts={posts}
+                deletePost={deletePost}
+                editPost={editPost}
+              />
+            }
           />
         </Route>
+        <Route path="/" element={<BlogPage />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
       </Routes>
     </BrowserRouter>
   );

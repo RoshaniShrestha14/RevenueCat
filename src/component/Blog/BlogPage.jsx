@@ -1,15 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./BlogPage.css";
 import Featured from "./Featured";
 import BlogControls from "./BlogControls";
-/* ================= BLOG CARD ================= */ const BlogCard = ({
-  image,
-  category,
-  title,
-  desc,
-  author,
-  date,
-}) => {
+/* ================= BLOG CARD ================= */
+const BlogCard = ({ id, image, category, title, desc, author, date }) => {
   return (
     <article className="blog-card">
       <img
@@ -19,10 +14,17 @@ import BlogControls from "./BlogControls";
       />
       <div className="blog-content">
         <p className="category">{category}</p>
-        <h3>{title}</h3>
+        <h3>
+          <Link to={`/blog/${id}`} className="blog-title-link">
+            {title}
+          </Link>
+        </h3>
         <p className="desc">{desc}</p>
         <div className="author">
-          <img src={author?.img || "/logo.svg"} alt={author?.name || "Author"} />
+          <img
+            src={author?.img || "/logo.svg"}
+            alt={author?.name || "Author"}
+          />
           <div>
             <p>{author?.name}</p>
             <span>{date}</span>
@@ -34,8 +36,10 @@ import BlogControls from "./BlogControls";
 };
 /* ================= STATIC BLOG DATA ================= */ const staticBlogs = [
   {
+    id: "kotlin-coroutine-bridge",
     image: "/src/images/Kotlin-Coroutines-bridges.webp",
     category: "ENGINEERING",
+
     title:
       "Kotlin Coroutine bridges: converting any callback-based Android API to suspend functions",
     desc: "This article explores the suspendCoroutine bridge pattern, showing how to convert callback APIs into clean suspend functions,...",
@@ -87,9 +91,7 @@ import BlogControls from "./BlogControls";
     date: "March 23, 2026",
   },
 ];
-const BlogPage = ({
-  posts = [],
-}) => {
+const BlogPage = ({ posts = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const itemsPerPage = 9;
@@ -107,22 +109,23 @@ const BlogPage = ({
 
   const totalPages = Math.ceil(filteredArticles.length / itemsPerPage);
   const startIdx = (currentPage - 1) * itemsPerPage;
-  const visibleArticles = filteredArticles.slice(startIdx, startIdx + itemsPerPage);
+  const visibleArticles = filteredArticles.slice(
+    startIdx,
+    startIdx + itemsPerPage,
+  );
 
   return (
     <>
-    <Featured />{" "}
+      <Featured />{" "}
       <BlogControls
         setCategoryFilter={setActiveCategory}
         onCategoryChange={() => setCurrentPage(1)}
-      /> {/* 🔥 BLOGS */}
+      />{" "}
+      {/* 🔥 BLOGS */}
       <section className="blog-page">
         <div className="container grid">
           {visibleArticles.map((blog, index) => (
-            <BlogCard
-              key={blog.id || `${blog.title}-${index}`}
-              {...blog}
-            />
+            <BlogCard key={blog.id || `${blog.title}-${index}`} {...blog} />
           ))}
           {currentPage === 1 && (
             <>
@@ -252,15 +255,17 @@ const BlogPage = ({
           {totalPages > 1 && (
             <div className="pagination-wrapper">
               <ul className="pagination">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <li
-                    key={page}
-                    className={currentPage === page ? "active" : ""}
-                    onClick={() => setCurrentPage(page)}
-                  >
-                    {page}
-                  </li>
-                ))}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <li
+                      key={page}
+                      className={currentPage === page ? "active" : ""}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           )}
