@@ -59,8 +59,80 @@ const posts = [
       </code>
       </pre>
       <p>This is not a language feature you get for free. Each of those&nbsp;<code>await</code>&nbsp;functions require a bridge that converts the underlying callback into a coroutine suspension point. Let’s trace through exactly how that bridge works.</p>
-      
-    `,
+      <h2 class="heading-with-copy" id="bridge">
+  The core bridge: suspendCoroutine
+
+  <button class="copy-btn" onclick="copyHeadingLink('bridge')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>Kotlin provides&nbsp;<code>suspendCoroutine</code>&nbsp;as the primitive for bridging between callback-based code and coroutines. The function suspends the current coroutine and gives you a&nbsp;<code>Continuation&lt;T&gt;</code>&nbsp;object. You call&nbsp;<code>continuation.resume(value)</code>&nbsp;to deliver a result, or&nbsp;<code>continuation.resumeWithException(exception)</code>&nbsp;to deliver an error. The coroutine resumes at exactly the point it was suspended.</p>
+<p>The simplest bridge handles a single value callback:</p>
+ <pre class="line-numbers"><code class="language-kotlin">
+suspend fun <T> awaitCallback(block: (Continuation<T>) -> Unit): T =
+    suspendCoroutine { continuation ->
+        block(continuation)
+    }
+      </code></pre>
+
+      <p>And here is how it is typically used with a callback-based API:</p>
+
+      <pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConnect(): Boolean {
+    return suspendCoroutine { continuation ->
+        startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(result: BillingResult) {
+                continuation.resume(
+                    result.responseCode == BillingClient.BillingResponseCode.OK
+                )
+            }
+
+            override fun onBillingServiceDisconnected() {
+                // Connection lost after setup, not during initial connect
+            }
+        })
+    }
+}
+      </code></pre>
+      <p>The pattern has three parts. First, call&nbsp;<code>suspendCoroutine</code>&nbsp;to pause the coroutine and receive a&nbsp;<code>Continuation</code>. Second, call the callback-based API, passing an anonymous implementation that captures the continuation. Third, inside the callback, call&nbsp;<code>resume</code>&nbsp;or&nbsp;<code>resumeWithException</code>&nbsp;to deliver the result and unfreeze the coroutine.</p>
+      <p>One important rule: you must call&nbsp;<code>resume</code>&nbsp;or&nbsp;<code>resumeWithException</code>&nbsp;exactly once. Calling it zero times means the coroutine hangs forever. Calling it twice throws&nbsp;<code>IllegalStateException</code>. Every code path through your callback must reach exactly one resume call.</p>
+     <h2 class="heading-with-copy" id="two-path-bridge">
+  Success and error callbacks: The two-path bridge
+
+  <button class="copy-btn" onclick="copyHeadingLink('two-path-bridge')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>Looking at the&nbsp;<code>awaitOfferings</code>&nbsp;extension function:</p> 
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun <T> awaitCallback(block: (Continuation<T>) -> Unit): T =
+    suspendCoroutine { continuation ->
+        block(continuation)
+    }
+</code></pre>
+
+<p>And here is how it is typically used with a callback-based API:</p>
+
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConnect(): Boolean {
+    return suspendCoroutine { continuation ->
+        startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(result: BillingResult) {
+                continuation.resume(
+                    result.responseCode == BillingClient.BillingResponseCode.OK
+                )
+            }
+
+            override fun onBillingServiceDisconnected() {
+                // Connection lost after setup, not during initial connect
+            }
+        })
+    }
+}
+</code></pre>
+`,
   },
 ];
 

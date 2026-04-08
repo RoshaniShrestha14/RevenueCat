@@ -18,6 +18,12 @@ const BlogDetail = () => {
 
   useEffect(() => {
     Prism.highlightAll();
+    window.copyHeadingLink = (id) => {
+      const url = window.location.origin + window.location.pathname + "#" + id;
+      navigator.clipboard.writeText(url);
+
+      alert("Link copied!");
+    };
   }, [blog]);
 
   if (!blog) return <h2>Blog not found</h2>;

@@ -462,3 +462,48 @@ pre.line-numbers code {
   color: #666;
   font-size: 14px;
 }
+/* ===== HEADING COPY BUTTON ===== */
+.heading-with-copy {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* button */
+.copy-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0;
+  transition: 0.2s;
+  position: relative;
+}
+
+/* show on hover */
+.heading-with-copy:hover .copy-btn {
+  opacity: 1;
+}
+
+/* tooltip */
+.tooltip {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+/* show tooltip */
+.copy-btn:hover .tooltip {
+  opacity: 1;
+}
