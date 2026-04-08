@@ -1,54 +1,24 @@
 import { useParams } from "react-router-dom";
 import "./BlogDetail.css";
+import Prism from "prismjs";
 
-/* Header & Footer */
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-kotlin";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.js";
+import { useEffect } from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
-
-const blogs = [
-  {
-    id: "kotlin-coroutine-bridge",
-    title:
-      "Kotlin Coroutine bridges: converting any callback-based Android API to suspend functions",
-    category: "ENGINEERING",
-    image: "/src/images/Kotlin-Coroutines-bridges.webp",
-
-    toc: [
-      {
-        id: "problem",
-        label: "The fundamental problem: Callbacks do not compose",
-      },
-      { id: "bridge", label: "The core bridge: suspendCoroutine" },
-      { id: "factory", label: "The callback factory" },
-      { id: "mistakes", label: "Common mistakes to avoid" },
-      { id: "conclusion", label: "Conclusion" },
-    ],
-
-    content: `
-      <h2 id="problem">The fundamental problem</h2>
-      <p>Callbacks do not compose well and create messy code.</p>
-
-      <h2 id="bridge">The core bridge: suspendCoroutine</h2>
-      <p>This allows converting callbacks into suspend functions.</p>
-
-      <h2 id="factory">The callback factory</h2>
-      <p>We can reduce boilerplate using reusable callback factories.</p>
-
-      <h2 id="mistakes">Common mistakes to avoid</h2>
-      <ul>
-        <li>Resuming twice</li>
-        <li>Not resuming at all</li>
-      </ul>
-
-      <h2 id="conclusion">Conclusion</h2>
-      <p>This pattern makes async code cleaner and modern.</p>
-    `,
-  },
-];
+import posts from "../../data/posts";
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const blog = blogs.find((b) => b.id === id);
+
+  const blog = posts.find((b) => b.id === id);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [blog]);
 
   if (!blog) return <h2>Blog not found</h2>;
 
@@ -62,14 +32,16 @@ const BlogDetail = () => {
           <aside className="toc-sidebar">
             <h3>Table of contents</h3>
             <ul>
-              {blog.toc.map((item) => (
+              {blog.toc?.map((item) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
                     onClick={(e) => {
                       e.preventDefault();
                       const el = document.getElementById(item.id);
-                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
                     }}
                   >
                     {item.label}
@@ -82,17 +54,51 @@ const BlogDetail = () => {
           {/* CENTER: CONTENT */}
           <div className="content">
             <p className="category">{blog.category}</p>
-            <h1>{blog.title}</h1>
 
-            <img src={blog.image} alt="" className="cover" />
+            <div className="blog-header">
+              <h1 className="blog-title">{blog.title}</h1>
 
+              <p className="blog-subtitle">
+                This article explores the suspendCoroutine bridge pattern,
+                showing how to convert callback APIs into clean suspend
+                functions, handle diverse callback shapes, design proper error
+                propagation, and how SDKs like RevenueCat apply it at scale.
+              </p>
+
+              <div className="blog-meta">
+                <span className="read-time">10 min read</span>
+              </div>
+            </div>
+
+            <img src={blog.image} alt={blog.title} className="cover" />
+
+            <div className="author-meta">
+              <div className="author-left">
+                <img
+                  src="/src/images/Jaewoong-Eum.3.webp"
+                  alt="author"
+                  className="author-avatar"
+                />
+                <div className="author-info">
+                  <p className="author-name">Jaewoong Eum</p>
+                </div>
+              </div>
+
+              <div className="author-right">
+                <span>
+                  Published <time className="publish-date">March 31, 2026</time>
+                </span>
+              </div>
+            </div>
+
+            {/* BLOG CONTENT */}
             <div
               className="blog-body"
               dangerouslySetInnerHTML={{ __html: blog.content }}
-            ></div>
+            />
           </div>
 
-          {/* RIGHT: SIDEBAR */}
+          {/* RIGHT SIDEBAR */}
           <aside className="right-sidebar">
             <h2 className="sidebar-title">You might also like</h2>
 
@@ -103,7 +109,7 @@ const BlogDetail = () => {
                   Understanding Flow, StateFlow, and SharedFlow
                 </a>
                 <p className="related-desc">
-                  Dive deep into internal mechanisms of Flow and StateFlow.
+                  Dive deep into internal mechanisms of Flow.
                 </p>
               </li>
 
@@ -113,7 +119,7 @@ const BlogDetail = () => {
                   Handling edge cases in Google Play Billing
                 </a>
                 <p className="related-desc">
-                  Covers pending purchases, errors, and subscription cases.
+                  Covers billing edge cases and subscriptions.
                 </p>
               </li>
 
@@ -123,7 +129,7 @@ const BlogDetail = () => {
                   Android SDK lifecycle management with Hilt
                 </a>
                 <p className="related-desc">
-                  Learn lifecycle management using dependency injection.
+                  Learn dependency injection with lifecycle handling.
                 </p>
               </li>
             </ul>

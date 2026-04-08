@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./BlogPage.css";
 import Featured from "./Featured";
 import BlogControls from "./BlogControls";
+
 /* ================= BLOG CARD ================= */
 const BlogCard = ({ id, image, category, title, desc, author, date }) => {
   return (
