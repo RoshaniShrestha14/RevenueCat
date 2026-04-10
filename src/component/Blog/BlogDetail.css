@@ -616,3 +616,115 @@ html {
     font-size: 16px;
   }
 }
+/* Common list styling */
+.wp-block-list {
+  padding-left: 28px; /* pushes bullets/numbers right */
+  margin: 16px 0;
+}
+
+/* Bullet list */
+.wp-block-list {
+  list-style-type: disc;
+}
+
+/* Ordered list */
+ol.wp-block-list {
+  list-style-type: decimal;
+}
+
+/* Marker (bullet / number) color */
+.wp-block-list li::marker {
+  color: #f05b5b;
+  font-weight: 600;
+}
+
+/* Spacing between items */
+.wp-block-list li {
+  margin-bottom: 8px;
+}
+.prose a {
+  color: #f05b5b;
+}
+
+.prose a:hover {
+  color: blue;
+}
+.subscribe-section {
+  margin-top: 74px;
+  padding: 0 16px;
+}
+
+.subscribe-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 24px;
+  background: linear-gradient(270deg, #f9f9fb 0%, #fbf9f9 100%);
+  padding: 1px;
+  text-align: center;
+}
+
+.subscribe-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 23px;
+  background: #f5f5f7;
+  padding: 40px;
+}
+
+.subscribe-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
+}
+
+.subscribe-description {
+  margin-top: 12px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  color: #454954;
+  line-height: 1.4;
+}
+
+.subscribe-form {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.subscribe-input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+.subscribe-input {
+  width: 100%;
+  height: 60px;
+  border-radius: 999px;
+  border: 1px solid #e3e5e8;
+  padding: 0 160px 0 20px;
+  font-size: 16px;
+  outline: none;
+}
+
+.subscribe-button {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: none;
+  background: #2f6bff;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.subscribe-button:hover {
+  background: #1f55e0;
+}
