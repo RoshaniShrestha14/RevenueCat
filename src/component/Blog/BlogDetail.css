@@ -578,3 +578,41 @@ pre.line-numbers code {
 .toc-children a {
   font-size: 13px;
 }
+html {
+  scroll-behavior: smooth;
+}
+.summary {
+  margin-top: 32px;
+  padding: 24px 0 24px 22px;
+  border-left: 4px solid #f2545b;
+  position: relative;
+}
+
+.summary h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f2545b;
+  margin: 0;
+}
+
+.summary-content {
+  margin-top: 8px;
+}
+
+.summary-content p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+  color: #171a1c;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .summary {
+    padding-left: 12px;
+  }
+
+  .summary-content p {
+    font-size: 16px;
+  }
+}

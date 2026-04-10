@@ -11,11 +11,12 @@ import { useEffect } from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 import posts from "../../data/posts";
+import aiSubscriptionMarginsPost from "../../data/aiSubscriptionMargins";
 
 const BlogDetail = () => {
   const { id } = useParams();
   const [openItem, setOpenItem] = useState(null);
-  const blog = posts.find((b) => b.id === id);
+  const blog = posts.find((b) => b.id === id) || aiSubscriptionMarginsPost;
 
   useEffect(() => {
     Prism.highlightAll();
@@ -106,38 +107,12 @@ const BlogDetail = () => {
             <div className="blog-header">
               <h1 className="blog-title">{blog.title}</h1>
 
-              <p className="blog-subtitle">
-                This article explores the suspendCoroutine bridge pattern,
-                showing how to convert callback APIs into clean suspend
-                functions, handle diverse callback shapes, design proper error
-                propagation, and how SDKs like RevenueCat apply it at scale.
-              </p>
-
               <div className="blog-meta">
                 <span className="read-time">10 min read</span>
               </div>
             </div>
 
             <img src={blog.image} alt={blog.title} className="cover" />
-
-            <div className="author-meta">
-              <div className="author-left">
-                <img
-                  src="/src/images/Jaewoong-Eum.3.webp"
-                  alt="author"
-                  className="author-avatar"
-                />
-                <div className="author-info">
-                  <p className="author-name">Jaewoong Eum</p>
-                </div>
-              </div>
-
-              <div className="author-right">
-                <span>
-                  Published <time className="publish-date">March 31, 2026</time>
-                </span>
-              </div>
-            </div>
 
             {/* BLOG CONTENT */}
             <div
