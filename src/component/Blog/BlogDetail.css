@@ -507,3 +507,74 @@ pre.line-numbers code {
 .copy-btn:hover .tooltip {
   opacity: 1;
 }
+/* Code block container */
+.wp-block-code {
+  background: #0f172a; /* dark background */
+  color: #e2e8f0;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Code text */
+.wp-block-code code {
+  display: block;
+  white-space: pre;
+}
+
+/* Optional: scrollbar styling */
+.wp-block-code::-webkit-scrollbar {
+  height: 8px;
+}
+
+.wp-block-code::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.wp-block-code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Remove any borders or lines */
+.wp-block-code,
+.wp-block-code code {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Ensure clean background */
+.wp-block-code {
+  background: #0f172a; /* keep your desired background */
+}
+/* TOC Heading */
+.toc-sidebar h3 {
+  color: #f05b5b;
+}
+
+/* TOC Links */
+.toc-sidebar a {
+  color: #444;
+  text-decoration: none;
+}
+
+/* Hover */
+.toc-sidebar a:hover {
+  color: #f05b5b;
+}
+
+/* Prevent purple visited color */
+.toc-sidebar a:visited {
+  color: #444;
+}
+.toc-children {
+  margin-left: 12px;
+}
+
+.toc-children a {
+  font-size: 13px;
+}

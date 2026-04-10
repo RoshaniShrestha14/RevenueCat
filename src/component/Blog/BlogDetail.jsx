@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./BlogDetail.css";
+import { useState } from "react";
 import Prism from "prismjs";
 
 import "prismjs/themes/prism-tomorrow.css";
@@ -13,7 +14,7 @@ import posts from "../../data/posts";
 
 const BlogDetail = () => {
   const { id } = useParams();
-
+  const [openItem, setOpenItem] = useState(null);
   const blog = posts.find((b) => b.id === id);
 
   useEffect(() => {
@@ -44,14 +45,55 @@ const BlogDetail = () => {
                     href={`#${item.id}`}
                     onClick={(e) => {
                       e.preventDefault();
+
+                      // TOGGLE children
+                      if (item.children) {
+                        setOpenItem(openItem === item.id ? null : item.id);
+                      }
+
                       const el = document.getElementById(item.id);
                       if (el) {
-                        el.scrollIntoView({ behavior: "smooth" });
+                        const yOffset = -120;
+                        const y =
+                          el.getBoundingClientRect().top +
+                          window.pageYOffset +
+                          yOffset;
+
+                        window.scrollTo({ top: y, behavior: "smooth" });
                       }
                     }}
                   >
                     {item.label}
                   </a>
+
+                  {/* SHOW CHILDREN ONLY WHEN CLICKED */}
+                  {item.children && openItem === item.id && (
+                    <ul className="toc-children">
+                      {item.children.map((child) => (
+                        <li key={child.id}>
+                          <a
+                            href={`#${child.id}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const el = document.getElementById(child.id);
+
+                              if (el) {
+                                const yOffset = -120;
+                                const y =
+                                  el.getBoundingClientRect().top +
+                                  window.pageYOffset +
+                                  yOffset;
+
+                                window.scrollTo({ top: y, behavior: "smooth" });
+                              }
+                            }}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>

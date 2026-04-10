@@ -11,10 +11,68 @@ const posts = [
         id: "problem",
         label: "The fundamental problem: Callbacks do not compose",
       },
-      { id: "bridge", label: "The core bridge: suspendCoroutine" },
-      { id: "factory", label: "The callback factory" },
-      { id: "mistakes", label: "Common mistakes to avoid" },
-      { id: "conclusion", label: "Conclusion" },
+      {
+        id: "bridge",
+        label: "The core bridge: suspendCoroutine",
+      },
+      {
+        id: "two-path-bridge",
+        label: "Success and error callbacks: The two-path bridge",
+      },
+      {
+        id: "callback-factory",
+        label: "The callback factory: Abstracting interface boilerplate",
+      },
+      {
+        id: "multi-value",
+        label: "Multi-value callbacks: Wrapper classes",
+      },
+      {
+        id: "exceptions",
+        label: "Exception hierarchies: Preserving error semantics",
+      },
+      {
+        id: "result-variant",
+        label: "The Result<T> variant: Exceptions are not always what you want",
+      },
+      {
+        id: "lambda-layer",
+        label: "The lambda convenience layer: Bridging before the bridge",
+      },
+      {
+        id: "real-world",
+        label: "Real-world application: Bridging Google Play Billing directly",
+      },
+      {
+        id: "suspend-vs-cancellable",
+        label: "suspendCoroutine versus suspendCancellableCoroutine",
+      },
+      {
+        id: "beyond-billing",
+        label: "Applying the pattern beyond billing",
+      },
+      {
+        id: "mistakes",
+        label: "Common mistakes to avoid",
+        children: [
+          {
+            id: "resume-zero",
+            label: "Resuming zero times",
+          },
+          {
+            id: "resume-twice",
+            label: "Resuming twice",
+          },
+          {
+            id: "losing-error",
+            label: "Losing error type information",
+          },
+        ],
+      },
+      {
+        id: "conclusion",
+        label: "Conclusion",
+      },
     ],
 
     content: `
@@ -114,10 +172,10 @@ suspend fun Purchases.awaitOfferings(): Offerings {
 <p>Notice the structure. The&nbsp;<code>onSuccess</code>&nbsp;path uses a method reference&nbsp;<code>continuation::resume</code>&nbsp;directly. When the callback signature matches&nbsp;<code>(T) -&gt; Unit</code>&nbsp;and the continuation expects&nbsp;<code>T</code>, a method reference is the cleanest form. The&nbsp;<code>onError</code>&nbsp;path wraps the raw&nbsp;<code>PurchasesError</code>&nbsp;in a&nbsp;<code>PurchasesException</code>&nbsp;before passing it to&nbsp;<code>resumeWithException</code>. This is necessary because&nbsp;<code>resumeWithException</code>&nbsp;expects a&nbsp;<code>Throwable</code>, but the SDK’s error type is a plain data object, not an exception.</p>
 <p>The&nbsp;<code>@JvmSynthetic</code>&nbsp;annotation prevents this extension function from appearing in Java code, since Java callers should use the callback version. The&nbsp;<code>@Throws</code>&nbsp;annotation generates the&nbsp;<code>throws</code>&nbsp;clause in the bytecode so Java interop and documentation tools correctly report what this function can throw.</p>
 <p>This is not a language feature you get for free. Each of those&nbsp;<code>await</code>&nbsp;functions require a bridge that converts the underlying callback into a coroutine suspension point. Let’s trace through exactly how that bridge works.</p>
-      <h2 class="heading-with-copy" id="bridge">
+      <h2 class="heading-with-copy" id="callback-factory">
   The callback factory: Abstracting interface boilerplate
 
-  <button class="copy-btn" onclick="copyHeadingLink('bridge')">
+  <button class="copy-btn" onclick="copyHeadingLink('callback-factory')">
     🔗
     <span class="tooltip">Copy link</span>
   </button>
@@ -164,10 +222,10 @@ internal fun purchaseCompletedCallback(
 }
 </code></pre>
 <p>Notice the asymmetry. The success callback delivers two values: the transaction and the updated customer info. The error callback also delivers two values: the error and a boolean indicating whether the user cancelled. This is not a simple&nbsp;<code>(T) -&gt; Unit</code>&nbsp;shape. Bridging this to a suspend function requires additional design decisions.</p>
-   <h2 class="heading-with-copy" id="bridge">
+   <h2 class="heading-with-copy" id="multi-value">
   Multi-value callbacks: Wrapper classes
 
-  <button class="copy-btn" onclick="copyHeadingLink('bridge')">
+  <button class="copy-btn" onclick="copyHeadingLink('multi-value')">
     🔗
     <span class="tooltip">Copy link</span>
   </button>
@@ -212,10 +270,10 @@ suspend fun Purchases.awaitPurchase(
 </code></pre>
 <p>Two things are worth noting here. First, the success path wraps both values into a&nbsp;<code>PurchaseResult</code>&nbsp;so the caller gets a single typed return value. Second, the error path uses&nbsp;<code>PurchasesTransactionException</code>&nbsp;instead of the regular&nbsp;<code>PurchasesException</code>. This is because the error callback carries an extra&nbsp;<code>userCancelled</code>&nbsp;boolean that callers need to distinguish user initiated cancellation from actual errors. The exception hierarchy preserves this information.</p>
 
-<h2 class="heading-with-copy" id="bridge">
+<h2 class="heading-with-copy" id="exceptions">
  Exception hierarchies: Preserving error semantics
 
-  <button class="copy-btn" onclick="copyHeadingLink('bridge')">
+  <button class="copy-btn" onclick="copyHeadingLink('exceptions')">
     🔗
     <span class="tooltip">Copy link</span>
   </button>
@@ -275,10 +333,10 @@ try {
 </code></pre>
 <p>The key observation: the exception hierarchy mirrors the callback signature shapes. A callback with&nbsp;<code>(error)</code>&nbsp;maps to&nbsp;<code>PurchasesException</code>. A callback with&nbsp;<code>(error, userCancelled)</code>&nbsp;maps to&nbsp;<code>PurchasesTransactionException</code>. This is not accidental. It is a deliberate design that makes the suspend API as expressive as the callback API.</p>
 
-<h2 class="heading-with-copy" id="bridge">
+<h2 class="heading-with-copy" id="result-variant">
 The Result<T> variant: Exceptions are not always what you want
 
-  <button class="copy-btn" onclick="copyHeadingLink('bridge')">
+  <button class="copy-btn" onclick="copyHeadingLink('result-variant')">
     🔗
     <span class="tooltip">Copy link</span>
   </button>
@@ -366,8 +424,291 @@ result.onFailure { error ->
 </code></pre>
 <p>This dual API approach, throwing suspend functions and&nbsp;<code>Result</code>&nbsp;returning suspend functions, gives consumers the choice without forcing one style. The SDK does not pick winners. It supports both.</p>
 
+<h2 class="heading-with-copy" id="lambda-layer">
+The lambda convenience layer: Bridging before the bridge
+
+  <button class="copy-btn" onclick="copyHeadingLink('lambda-layer')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>There is a middle layer between the raw callback interface API and the suspend bridge that is worth examining. RevenueCat provides extension functions that accept lambda pairs instead of typed callback objects:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+fun Purchases.getOfferingsWith(
+    onError: (error: PurchasesError) -&gt; Unit = ON_ERROR_STUB,
+    onSuccess: (offerings: Offerings) -&gt; Unit,
+) {
+    getOfferings(receiveOfferingsCallback(onSuccess, onError))
+}
+</code></pre>
+<p>This is a two step bridge design. The lambda extension (<code>getOfferingsWith</code>) converts lambdas to a typed callback. The suspend extension (<code>awaitOfferings</code>) converts the lambda extension to a coroutine. Each layer does one thing.</p>
+<p>Notice the default error handler:</p>
+
+<pre class="line-numbers"><code>
+internal val ON_ERROR_STUB: (error: PurchasesError) -&gt; Unit = {}
+</code></pre>
+<p>This allows callers who do not care about errors to omit the error handler. This is useful for fire and forget operations, but should be used carefully since silently swallowing errors is a common source of bugs.</p>
+<p>The purchase version has its own stub:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+internal val ON_PURCHASE_ERROR_STUB: (error: PurchasesError, userCancelled: Boolean) -&gt; Unit =
+    { _, _ -&gt; }
+</code></pre>
+<p>Two separate stubs for two different callback shapes. Each matches the exact lambda signature its callback requires.</p>
+
+<h2 class="heading-with-copy" id="real-world">
+Real-world application: Bridging Google Play Billing directly
+
+  <button class="copy-btn" onclick="copyHeadingLink('real-world')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>The same&nbsp;<code>suspendCoroutine</code>&nbsp;pattern applies to any callback based Android API. Here is how you would bridge Google Play Billing’s acknowledgment API:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitAcknowledge(purchaseToken: String): Boolean {
+    return suspendCoroutine { continuation ->
+        val params = AcknowledgePurchaseParams.newBuilder()
+            .setPurchaseToken(purchaseToken)
+            .build()
+
+        acknowledgePurchase(params) { billingResult ->
+            continuation.resume(
+                billingResult.responseCode == BillingClient.BillingResponseCode.OK
+            )
+        }
+    }
+}
+</code></pre>
+<p>And the consume API follows the same structure:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConsume(purchaseToken: String): Boolean {
+    return suspendCoroutine { continuation ->
+        val params = ConsumeParams.newBuilder()
+            .setPurchaseToken(purchaseToken)
+            .build()
+
+        consumeAsync(params) { billingResult, _ ->
+            continuation.resume(
+                billingResult.responseCode == BillingClient.BillingResponseCode.OK
+            )
+        }
+    }
+}
+</code></pre>
+<p>Even the billing client connection, which has two separate callback methods (<code>onBillingSetupFinished</code>&nbsp;and&nbsp;<code>onBillingServiceDisconnected</code>), bridges cleanly:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConnect(): Boolean {
+    if (isReady) return true
+
+    return suspendCoroutine { continuation ->
+        startConnection(object : BillingClientStateListener {
+
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                continuation.resume(
+                    billingResult.responseCode == BillingClient.BillingResponseCode.OK
+                )
+            }
+
+            override fun onBillingServiceDisconnected() {
+                // Called when connection is lost after setup, not during setup.
+                // The continuation has already been resumed by onBillingSetupFinished.
+            }
+        })
+    }
+}
+</code></pre>
+<p>The&nbsp;<code>onBillingServiceDisconnected</code>&nbsp;method is called after a successful setup when the connection is later lost, not as an alternative to&nbsp;<code>onBillingSetupFinished</code>&nbsp;during the initial connection. This is an important subtlety. If both methods could fire during setup, you would need additional state tracking to ensure exactly one resume call.</p>
 
 
+<h2 class="heading-with-copy" id="suspend-vs-cancellable">
+suspendCoroutine versus suspendCancellableCoroutine
+
+  <button class="copy-btn" onclick="copyHeadingLink('suspend-vs-cancellable')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>There is a more advanced variant:&nbsp;<code>suspendCancellableCoroutine</code>. The difference is that it gives you a&nbsp;<code>CancellableContinuation</code>&nbsp;that responds to coroutine cancellation.</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConnectCancellable(): Boolean {
+    if (isReady) return true
+
+    return suspendCancellableCoroutine { continuation ->
+
+        val listener = object : BillingClientStateListener {
+
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (continuation.isActive) {
+                    continuation.resume(
+                        billingResult.responseCode == BillingClient.BillingResponseCode.OK
+                    )
+                }
+            }
+
+            override fun onBillingServiceDisconnected() {}
+        }
+
+        startConnection(listener)
+
+        continuation.invokeOnCancellation {
+            // Clean up: end the billing connection if the coroutine is cancelled
+            endConnection()
+        }
+    }
+}
+</code></pre>
+<p>When should you use which? Use&nbsp;<code>suspendCoroutine</code>&nbsp;when the underlying operation cannot be cancelled, or when cancellation cleanup is unnecessary. Most SDK callbacks fall into this category: once you call&nbsp;<code>getOfferings</code>, you cannot un-call it, and letting the callback complete harmlessly is fine.</p>
+<p>Use&nbsp;<code>suspendCancellableCoroutine</code>&nbsp;when the underlying operation holds resources that should be released on cancellation. Long running connections, streams, or operations that allocate expensive resources benefit from cancellation support.</p>
+<p>RevenueCat’s public coroutine extensions use&nbsp;<code>suspendCoroutine</code>&nbsp;because the underlying SDK calls are short lived network requests. The callback will fire quickly, and the cost of letting it complete (even if the coroutine is cancelled) is negligible compared to the complexity of cancellation handling.</p>
+
+<h2 class="heading-with-copy" id="beyond-billing">
+Applying the pattern beyond billing
+
+  <button class="copy-btn" onclick="copyHeadingLink('beyond-billing')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>The bridge pattern is not limited to billing APIs. The same approach works for any callback-based Android API. A few examples:</p>
+<p>For FusedLocationProviderClient, which delivers location through&nbsp;<code>LocationCallback</code>:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun FusedLocationProviderClient.awaitLastLocation(): Location? {
+    return suspendCoroutine { continuation ->
+        lastLocation
+            .addOnSuccessListener { location ->
+                continuation.resume(location)
+            }
+            .addOnFailureListener { e ->
+                continuation.resumeWithException(e)
+            }
+    }
+}
+</code></pre>
+<p>For SharedPreferences, which uses&nbsp;<code>OnSharedPreferenceChangeListener</code>&nbsp;for change notifications:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun SharedPreferences.awaitChange(key: String): String? {
+    return suspendCancellableCoroutine { continuation ->
+
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, changedKey ->
+            if (changedKey == key) {
+                continuation.resume(prefs.getString(key, null))
+            }
+        }
+
+        registerOnSharedPreferenceChangeListener(listener)
+
+        continuation.invokeOnCancellation {
+            unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }
+}
+</code></pre>
+<p>The common structure is always the same: wrap with&nbsp;<code>suspendCoroutine</code>, register the callback, resume when the callback fires. What changes is the callback shape, how many values you need to capture, and whether cancellation cleanup is needed.</p>
+
+<h2 class="heading-with-copy" id="mistakes">
+Common mistakes to avoid
+
+  <button class="copy-btn" onclick="copyHeadingLink('mistakes')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<h3 class="heading-with-copy" id="resume-zero">
+Resuming zero times
+
+  <button class="copy-btn" onclick="copyHeadingLink('resume-zero')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h3>
+<p>If there is a code path where the callback never fires, the coroutine suspends forever. This is especially common with connection listeners that have multiple callback methods:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+suspend fun BillingClient.awaitConnectSafe(): Boolean {
+    return withTimeout(5_000) {
+        suspendCancellableCoroutine { continuation ->
+
+            startConnection(object : BillingClientStateListener {
+
+                override fun onBillingSetupFinished(billingResult: BillingResult) {
+                    if (continuation.isActive) {
+                        continuation.resume(
+                            billingResult.responseCode == BillingClient.BillingResponseCode.OK
+                        )
+                    }
+                }
+
+                override fun onBillingServiceDisconnected() {
+                    if (continuation.isActive) {
+                        continuation.resume(false)
+                    }
+                }
+            })
+        }
+    }
+}
+</code></pre>
+
+<h3 class="heading-with-copy" id="resume-twice">
+Resuming twice
+
+  <button class="copy-btn" onclick="copyHeadingLink('resume-twice')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h3>
+<p>If a callback can fire multiple times (like a location listener that delivers updates continuously),&nbsp;<code>suspendCoroutine</code>&nbsp;is the wrong tool. Each call to&nbsp;<code>resume</code>&nbsp;after the first throws&nbsp;<code>IllegalStateException</code>. For repeating callbacks, use&nbsp;<code>callbackFlow</code>&nbsp;instead:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+fun FusedLocationProviderClient.locationUpdates(
+    request: LocationRequest
+): Flow<Location> = callbackFlow {
+
+    val callback = object : LocationCallback() {
+
+        override fun onLocationResult(result: LocationResult) {
+            result.lastLocation?.let { trySend(it) }
+        }
+    }
+
+    requestLocationUpdates(request, callback, Looper.getMainLooper())
+
+    awaitClose { removeLocationUpdates(callback) }
+}
+</code></pre>
+<p><code>suspendCoroutine</code>&nbsp;is for one shot callbacks.&nbsp;<code>callbackFlow</code>&nbsp;is for streaming callbacks. Choosing the wrong primitive leads to crashes or hangs.</p>
+
+<h3 class="heading-with-copy" id="losing-error">
+Losing error type information
+
+  <button class="copy-btn" onclick="copyHeadingLink('losing-error')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h3>
+<p>Wrapping all errors as&nbsp;<code>Exception(error.message)</code>&nbsp;strips away the structured error data callers need:</p>
+<pre class="line-numbers"><code class="language-kotlin">
+// Bad: caller cannot programmatically distinguish error types
+onError = { error ->
+    continuation.resumeWithException(Exception(error.message))
+}
+
+// Good: caller can match on error code
+onError = { error ->
+    continuation.resumeWithException(PurchasesException(error))
+}
+</code></pre>
+<p>The extra work of defining a typed exception class pays for itself every time a caller needs to handle specific error conditions differently.</p>
+
+<h2 class="heading-with-copy" id="conclusion">
+Conclusion
+
+  <button class="copy-btn" onclick="copyHeadingLink('conclusion')">
+    🔗
+    <span class="tooltip">Copy link</span>
+  </button>
+</h2>
+<p>In this article, you’ve explored the&nbsp;<code>suspendCoroutine</code>&nbsp;bridge pattern from its simplest form, a single value callback, through the production patterns used in RevenueCat’s Android SDK: multi value wrapper classes, typed exception hierarchies, callback factory functions, and dual API styles with both throwing and&nbsp;<code>Result</code>&nbsp;returning variants. The pattern is always the same three steps: suspend the coroutine, register the callback, and resume exactly once.</p>
+<p>Understanding this bridge is practical knowledge for any Android developer. Most of the platform APIs you use daily, billing, location, Bluetooth, camera, were designed around callbacks. Converting them to suspend functions makes your code sequential, testable, and composable. The patterns covered here, especially the callback factory layer, the typed exception hierarchy, and the&nbsp;<code>Result&lt;T&gt;</code>&nbsp;variant, are directly reusable in your own projects.</p>
+<p>Whether you’re bridging Google Play Billing’s&nbsp;<code>PurchasesUpdatedListener</code>, wrapping a legacy networking library, or building a suspend-friendly API for your own SDK, these patterns provide the foundation for clean, correct coroutine integration on Android.</p>
 
 `,
   },
