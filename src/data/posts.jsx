@@ -1,6 +1,7 @@
 import kotlin from "./kotlin";
-import aiSubscriptionMargins from "./aiSubscriptionMargins";
+import aiSubscriptionMarginsPost from "./aiSubscriptionMargins";
+import solveTimePost from "./solveTimePost";
 
-const posts = [...kotlin, aiSubscriptionMargins];
+const posts = [...kotlin, aiSubscriptionMarginsPost, solveTimePost];
 
 export default posts;

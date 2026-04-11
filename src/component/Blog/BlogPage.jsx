@@ -64,6 +64,7 @@ const BlogCard = ({ id, image, category, title, desc, author, date }) => {
     date: "March 26, 2026",
   },
   {
+    id: "solve-time-pay-you",
     image: "/src/images/Launched.webp",
     category: "GROWTH",
     title: "Solve time, and they'll pay you",
