@@ -51,6 +51,7 @@ const BlogCard = ({ id, image, category, title, desc, author, date }) => {
     date: "March 31, 2026",
   },
   {
+    id: "ai-subscription-margins",
     image: "/src/images/subscription.webp",
     category: "GROWTH",
     title:
@@ -97,7 +98,7 @@ const BlogPage = ({ posts = [] }) => {
   const [activeCategory, setActiveCategory] = useState("ALL");
   const itemsPerPage = 9;
 
-  const postsWithFallbackCategory = posts.map((post) => ({
+  const postsWithFallbackCategory = (posts || []).map((post) => ({
     ...post,
     category: post.category || "GENERAL",
   }));

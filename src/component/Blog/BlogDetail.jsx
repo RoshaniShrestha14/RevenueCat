@@ -11,12 +11,12 @@ import { useEffect } from "react";
 import Header from "../Layout/Header";
 import Footer from "../Layout/Footer";
 import posts from "../../data/posts";
-import aiSubscriptionMarginsPost from "../../data/aiSubscriptionMargins";
 
 const BlogDetail = () => {
   const { id } = useParams();
   const [openItem, setOpenItem] = useState(null);
-  const blog = posts.find((b) => b.id === id) || aiSubscriptionMarginsPost;
+  const blog = posts.find((b) => b.id === id);
+  // const blog = posts.find((b) => String(b.id) === String(id));
 
   useEffect(() => {
     Prism.highlightAll();
@@ -116,6 +116,7 @@ const BlogDetail = () => {
 
             {/* BLOG CONTENT */}
             <div
+              key={blog.id}
               className="blog-body"
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />

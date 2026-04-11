@@ -1,4 +1,4 @@
-const aiSubscriptionMarginsPost = {
+const aiSubscriptionMargins = {
   id: "ai-subscription-margins",
   title:
     "AI features are eroding your subscription app’s margins — here’s how to fix it",
@@ -94,7 +94,7 @@ const aiSubscriptionMarginsPost = {
   </div>
 </section>
   
-<p ">
+<p >
   Right now, many subscription apps are adding AI features as quickly as possible. And it’s working — the product demo looks impressive, engagement spikes, the feature quickly becomes central to the app and user experience. But something else starts happening underneath the surface. With every generation, every prompt, and every “generate again” button click, the cost of serving your users is quietly (but rapidly) increasing.
 </p>
 <p>Working with several AI-powered subscription apps recently, I started noticing this pattern. The very behavior you are trying to encourage — more usage, more exploration, more interaction — can now compress your margins if monetization and infrastructure are not designed in tandem.&nbsp;</p>
@@ -391,4 +391,4 @@ AI only works if the economics do
   `,
 };
 
-export default aiSubscriptionMarginsPost;
+export default aiSubscriptionMargins;
