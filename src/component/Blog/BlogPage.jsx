@@ -76,6 +76,7 @@ const BlogCard = ({ id, image, category, title, desc, author, date }) => {
     date: "March 25, 2026",
   },
   {
+    id: "android-paywall-conversion-gap",
     image: "/src/images/android.webp",
     category: "ENGINEERING",
     title:
@@ -85,6 +86,7 @@ const BlogCard = ({ id, image, category, title, desc, author, date }) => {
     date: "March 25, 2026",
   },
   {
+    id: "free-trials-dont-make-sense",
     image: "/src/images/free.webp",
     category: "GROWTH",
     title:

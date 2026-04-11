@@ -816,3 +816,44 @@ ol.wp-block-list {
 .wp-block-list a:hover {
   color: blue;
 }
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+
+.custom-table th {
+  text-align: left;
+  background: #f7f7f7;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.custom-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.custom-table tr:hover {
+  background-color: #fafafa;
+}
+
+/* Optional: rounded look */
+.wp-block-table {
+  overflow-x: auto;
+}
+.custom-table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.custom-table th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.custom-table th:last-child {
+  border-top-right-radius: 12px;
+}

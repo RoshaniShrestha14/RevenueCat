@@ -15,8 +15,8 @@ import posts from "../../data/posts";
 const BlogDetail = () => {
   const { id } = useParams();
   const [openItem, setOpenItem] = useState(null);
-  const blog = posts.find((b) => b.id === id);
-  // const blog = posts.find((b) => String(b.id) === String(id));
+  // const blog = posts.find((b) => b.id === id);
+  const blog = posts.find((b) => String(b.id) === String(id));
 
   useEffect(() => {
     Prism.highlightAll();
@@ -28,7 +28,11 @@ const BlogDetail = () => {
     };
   }, [blog]);
 
-  if (!blog) return <h2>Blog not found</h2>;
+  if (!blog) {
+    console.error("Blog not found. ID:", id);
+    console.log(posts);
+    return <h2>Blog not found</h2>;
+  }
 
   return (
     <>
