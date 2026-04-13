@@ -857,3 +857,50 @@ ol.wp-block-list {
 .custom-table th:last-child {
   border-top-right-radius: 12px;
 }
+.tip-box {
+  display: flex;
+  gap: 10px;
+  background: #f8f9fb;
+  padding: 20px 18px;
+  margin-top: 24px;
+  position: relative;
+  border-left: 4px solid #576cdb;
+  border-radius: 6px;
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.tip-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tip-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  color: #111;
+}
+
+.tip-text p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.tip-text a {
+  color: #576cdb;
+  text-decoration: none;
+}
+
+.tip-text a:hover {
+  text-decoration: underline;
+}

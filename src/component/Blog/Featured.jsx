@@ -1,20 +1,23 @@
 import "./Featured.css";
+import { Link } from "react-router-dom";
 
 const Featured = () => {
   return (
     <section className="featured-section">
-      {/* SEO hidden heading */}
       <h1 className="sr-only">Blog</h1>
 
       <div className="container">
         <article className="featured-grid">
           {/* IMAGE */}
-          <a href="#" className="image-wrapper">
+          <Link
+            to="/blog/state-of-subscription-apps-2026"
+            className="image-wrapper"
+          >
             <img
               src="/src/images/blog-cover.webp"
               alt="Subscription app trends 2026"
             />
-          </a>
+          </Link>
 
           {/* CONTENT */}
           <div className="content">
@@ -22,10 +25,10 @@ const Featured = () => {
               <p className="tag">Featured Post</p>
 
               <h2 className="title">
-                <a href="#">
+                <Link to="/blog/state-of-subscription-apps-2026">
                   The State of Subscription Apps in 10 minutes: lessons, trends,
                   and benchmarks for 2026
-                </a>
+                </Link>
               </h2>
 
               <p className="desc">
@@ -43,7 +46,9 @@ const Featured = () => {
 
               <div>
                 <p className="author-name">
-                  <a href="#">Lorelei Whitman</a>
+                  <Link to="/blog/state-of-subscription-apps-2026">
+                    Lorelei Whitman
+                  </Link>
                 </p>
                 <p className="date">March 19, 2026</p>
               </div>
