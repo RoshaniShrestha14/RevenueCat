@@ -125,7 +125,7 @@ const BlogPage = ({ posts = [] }) => {
       <BlogControls
         setCategoryFilter={setActiveCategory}
         onCategoryChange={() => setCurrentPage(1)}
-      />{" "}
+      />
       {/* 🔥 BLOGS */}
       <section className="blog-page">
         <div className="container grid">
