@@ -16,9 +16,13 @@ const BlogCard = ({ id, image, category, title, desc, author, date }) => {
       <div className="blog-content">
         <p className="category">{category}</p>
         <h3>
-          <Link to={`/blog/${id}`} className="blog-title-link">
-            {title}
-          </Link>
+          {id ? (
+            <Link to={`/blog/${id}`} className="blog-title-link">
+              {title}
+            </Link>
+          ) : (
+            <span className="blog-title-text">{title}</span>
+          )}
         </h3>
         <p className="desc">{desc}</p>
         <div className="author">

@@ -73,8 +73,7 @@
   width: 57%;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(6, minmax(92px, 1fr));
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   border-left: 1px solid #e8e8e8;
   background: #f9faff;
 }
@@ -87,11 +86,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
 }
 
 .logo-box img {
-  width: 58px;
-  height: 58px;
+  width: 58%;
+  height: 58%;
+  max-width: 58px;
+  max-height: 58px;
+  object-fit: contain;
   opacity: 0.9;
 }
 
@@ -117,7 +121,6 @@
 
   .logo-grid {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 92px);
     border-left: 0;
     border-top: 1px solid #e8e8e8;
   }
@@ -152,12 +155,18 @@
 
   .logo-grid {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 82px);
   }
 
   .logo-box img {
-    width: 44px;
-    height: 44px;
+    width: 52%;
+    height: 52%;
+    max-width: 44px;
+    max-height: 44px;
+  }
+
+  /* Hide the trailing empty cells on phones to avoid extra bottom rows */
+  .logo-grid .logo-box:nth-last-child(-n + 6) {
+    display: none;
   }
 }
 

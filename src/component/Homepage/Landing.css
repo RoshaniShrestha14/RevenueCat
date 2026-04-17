@@ -2,8 +2,12 @@
   min-height: calc(100vh - 64px);
   background: #f7f7fa;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 80px 34px 36px;
+  font-family: Arial, sans-serif;
+  overflow-x: clip;
 }
 
 .landing-container {
@@ -43,10 +47,12 @@
   flex-wrap: nowrap;
   margin-top: 30px;
   gap: 16px;
+  width: 100%;
 }
 
 .email-box {
   width: min(100%, 520px);
+  max-width: 520px;
   height: 68px;
   background: white;
   border-radius: 34px;
@@ -54,6 +60,7 @@
   display: flex;
   align-items: center;
   padding: 6px 8px;
+  min-width: 0;
 }
 
 .email-box input {
@@ -219,6 +226,7 @@
   .email-box {
     height: 68px;
     border-radius: 34px;
+    max-width: 100%;
   }
 
   .email-box input {
@@ -261,21 +269,27 @@
   .landing-right {
     justify-content: center;
   }
-}
 
-.landing {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: Arial, sans-serif;
+  .brand-strip {
+    padding: 28px 16px 14px;
+    margin-top: 22px;
+    justify-content: center;
+    gap: 20px 28px;
+    flex-wrap: wrap;
+  }
+
+  .brand-strip img {
+    height: 28px;
+  }
 }
 
 .brand-strip {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 34px;
   padding: 40px 60px;
   margin-top: 40px;
 }
@@ -283,4 +297,39 @@
 .brand-strip img {
   height: 40px;
   width: auto;
+}
+
+@media (max-width: 600px) {
+  .landing-action {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .email-box {
+    height: 60px;
+    border-radius: 30px;
+  }
+
+  .email-box button {
+    width: 138px;
+    height: 46px;
+    border-radius: 23px;
+    font-size: 13px;
+  }
+
+  .landing-action a {
+    align-self: flex-start;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .brand-strip {
+    gap: 14px 18px;
+    padding: 20px 12px 8px;
+  }
+
+  .brand-strip img {
+    height: 22px;
+  }
 }
