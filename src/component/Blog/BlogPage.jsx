@@ -128,7 +128,7 @@ const BlogPage = ({ posts = [] }) => {
       />
       {/* 🔥 BLOGS */}
       <section className="blog-page">
-        <div className="container grid">
+        <div className="blog-grid">
           {visibleArticles.map((blog, index) => (
             <BlogCard key={blog.id || `${blog.title}-${index}`} {...blog} />
           ))}
