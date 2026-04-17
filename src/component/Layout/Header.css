@@ -83,7 +83,7 @@
   }
 
   .header-logo-image {
-    width: 150px;
+    width: min(150px, 45vw);
   }
 
   .nav-desktop {
